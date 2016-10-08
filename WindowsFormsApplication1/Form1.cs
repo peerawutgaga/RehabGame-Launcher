@@ -23,5 +23,10 @@ namespace WindowsFormsApplication1
             Process.Start("D:\\leap-motion-game\\Game 1\\WindowsNoEditor\\RehabGame1Package.exe");
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Process.Start("D:\\leap-motion-game\\Game 2\\WindowsNoEditor\\RehabGame2Package.exe");
+        }
     }
 }
