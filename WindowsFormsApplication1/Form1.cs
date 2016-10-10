@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,12 +21,12 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //System.Diagnostics.Process.Start("");
+            //Process.Start("");
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //System.Diagnostics.Process.Start("");
+            //Process.Start("");
         }
     }
 }
