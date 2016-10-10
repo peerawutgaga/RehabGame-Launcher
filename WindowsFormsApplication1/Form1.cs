@@ -21,7 +21,9 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //Process.Start("");
+            //var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            //path = Path.Combine(path, "\\app\Game 1\RehabGame1Package");
+           // Process.Start(path);
         }
 
         private void button2_Click(object sender, EventArgs e)
