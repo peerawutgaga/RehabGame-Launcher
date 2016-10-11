@@ -21,14 +21,20 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var path = Directory.GetCurrentDirectory();
             //path = Path.Combine(path, "\\app\Game 1\RehabGame1Package");
-           // Process.Start(path);
+            //Process.Start("F:\\Game 1\\WindowsNoEditor\\RehabGame1Package.exe");
+            label1.Text = path;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             //Process.Start("");
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
