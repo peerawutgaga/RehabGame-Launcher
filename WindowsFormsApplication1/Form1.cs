@@ -23,13 +23,16 @@ namespace WindowsFormsApplication1
         {
             var path = Directory.GetCurrentDirectory();
             //path = Path.Combine(path, "\\app\Game 1\RehabGame1Package");
-            //Process.Start("F:\\Game 1\\WindowsNoEditor\\RehabGame1Package.exe");
+            //Process.Start(path);
             label1.Text = path;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //Process.Start("");
+            var path = Directory.GetCurrentDirectory();
+            //path = Path.Combine(path, "\\app\Game 2\RehabGame1Package");
+            //Process.Start(path);
+           
         }
 
         private void label1_Click(object sender, EventArgs e)
