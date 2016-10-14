@@ -26,5 +26,25 @@ namespace WindowsFormsApplication1
         {
             Close();
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void banner_Click(object sender, EventArgs e)
+        {
+            //This function is not used.
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sexSelector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
