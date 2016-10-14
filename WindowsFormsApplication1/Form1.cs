@@ -24,7 +24,7 @@ namespace WindowsFormsApplication1
             var path = Directory.GetCurrentDirectory();
             //path = Path.Combine(path, "\\app\Game 1\RehabGame1Package");
             //Process.Start(path);
-            label1.Text = path;
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -32,12 +32,19 @@ namespace WindowsFormsApplication1
             var path = Directory.GetCurrentDirectory();
             //path = Path.Combine(path, "\\app\Game 2\RehabGame1Package");
             //Process.Start(path);
+            
            
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void newButton_Click(object sender, EventArgs e)
+        {
+            Form register = new Form();
+            register.Show();
         }
     }
 }
