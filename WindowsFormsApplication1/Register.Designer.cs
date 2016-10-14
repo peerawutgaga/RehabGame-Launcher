@@ -33,9 +33,13 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.AddButton = new System.Windows.Forms.Button();
             this.banner = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.nameLabel = new System.Windows.Forms.Label();
+            this.surnameLabel = new System.Windows.Forms.Label();
             this.sexSelector = new System.Windows.Forms.ComboBox();
+            this.birthdayLabel = new System.Windows.Forms.Label();
+            this.birthdayBox = new System.Windows.Forms.TextBox();
+            this.birthyearBox = new System.Windows.Forms.TextBox();
+            this.birthmonthSelector = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // nameBox
@@ -44,7 +48,6 @@
             this.nameBox.Name = "nameBox";
             this.nameBox.Size = new System.Drawing.Size(193, 20);
             this.nameBox.TabIndex = 0;
-            this.nameBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // surnameBox
             // 
@@ -82,25 +85,24 @@
             this.banner.Size = new System.Drawing.Size(186, 31);
             this.banner.TabIndex = 4;
             this.banner.Text = "Register Form";
-            this.banner.Click += new System.EventHandler(this.banner_Click);
             // 
-            // label1
+            // nameLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 92);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Name";
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Location = new System.Drawing.Point(13, 92);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(35, 13);
+            this.nameLabel.TabIndex = 5;
+            this.nameLabel.Text = "Name";
             // 
-            // label2
+            // surnameLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 130);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Surname";
+            this.surnameLabel.AutoSize = true;
+            this.surnameLabel.Location = new System.Drawing.Point(13, 130);
+            this.surnameLabel.Name = "surnameLabel";
+            this.surnameLabel.Size = new System.Drawing.Size(49, 13);
+            this.surnameLabel.TabIndex = 6;
+            this.surnameLabel.Text = "Surname";
             // 
             // sexSelector
             // 
@@ -116,14 +118,59 @@
             this.sexSelector.Text = "-Sex-";
             this.sexSelector.SelectedIndexChanged += new System.EventHandler(this.sexSelector_SelectedIndexChanged);
             // 
+            // birthdayLabel
+            // 
+            this.birthdayLabel.AutoSize = true;
+            this.birthdayLabel.Location = new System.Drawing.Point(16, 175);
+            this.birthdayLabel.Name = "birthdayLabel";
+            this.birthdayLabel.Size = new System.Drawing.Size(45, 13);
+            this.birthdayLabel.TabIndex = 9;
+            this.birthdayLabel.Text = "Birthday";
+            // 
+            // birthdayBox
+            // 
+            this.birthdayBox.Location = new System.Drawing.Point(94, 175);
+            this.birthdayBox.Multiline = true;
+            this.birthdayBox.Name = "birthdayBox";
+            this.birthdayBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.birthdayBox.Size = new System.Drawing.Size(55, 20);
+            this.birthdayBox.TabIndex = 10;
+            this.birthdayBox.Text = "-Day-";
+            this.birthdayBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.birthdayBox.Click += new System.EventHandler(this.birthdayBox_click);
+            this.birthdayBox.TextChanged += new System.EventHandler(this.birthdayBox_TextChanged);
+            // 
+            // birthyearBox
+            // 
+            this.birthyearBox.Location = new System.Drawing.Point(280, 175);
+            this.birthyearBox.Name = "birthyearBox";
+            this.birthyearBox.Size = new System.Drawing.Size(67, 20);
+            this.birthyearBox.TabIndex = 12;
+            this.birthyearBox.Text = "-Year-";
+            this.birthyearBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.birthyearBox.Click += new System.EventHandler(this.birthyearBox_click);
+            // 
+            // birthmonthSelector
+            // 
+            this.birthmonthSelector.FormattingEnabled = true;
+            this.birthmonthSelector.Location = new System.Drawing.Point(155, 174);
+            this.birthmonthSelector.Name = "birthmonthSelector";
+            this.birthmonthSelector.Size = new System.Drawing.Size(119, 21);
+            this.birthmonthSelector.TabIndex = 14;
+            this.birthmonthSelector.Text = "-Month-";
+            // 
             // Register
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(391, 529);
+            this.Controls.Add(this.birthmonthSelector);
+            this.Controls.Add(this.birthyearBox);
+            this.Controls.Add(this.birthdayBox);
+            this.Controls.Add(this.birthdayLabel);
             this.Controls.Add(this.sexSelector);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.surnameLabel);
+            this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.banner);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.cancelButton);
@@ -143,8 +190,12 @@
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Label banner;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.Label surnameLabel;
         private System.Windows.Forms.ComboBox sexSelector;
+        private System.Windows.Forms.Label birthdayLabel;
+        private System.Windows.Forms.TextBox birthdayBox;
+        private System.Windows.Forms.TextBox birthyearBox;
+        private System.Windows.Forms.ComboBox birthmonthSelector;
     }
 }
