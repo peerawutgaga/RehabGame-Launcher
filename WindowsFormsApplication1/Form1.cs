@@ -43,8 +43,8 @@ namespace WindowsFormsApplication1
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            Form register = new Form();
-            register.Show();
+            Register r = new Register();
+            r.Show();
         }
     }
 }
