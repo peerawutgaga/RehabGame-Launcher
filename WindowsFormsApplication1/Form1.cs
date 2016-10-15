@@ -22,18 +22,23 @@ namespace WindowsFormsApplication1
         private void button1_Click(object sender, EventArgs e)
         {
             var path = Directory.GetCurrentDirectory();
-            //path = Path.Combine(path, "\\app\Game 1\RehabGame1Package");
+            path += "\\app\\Game 1\\RehabGame1Package.exe";
             //Process.Start(path);
-            
+            this.WindowState = FormWindowState.Minimized;
+            // while (Process.GetProcessesByName("RehabGame1Package").Length > 0) ;
+            this.WindowState = FormWindowState.Normal;     
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             var path = Directory.GetCurrentDirectory();
-            //path = Path.Combine(path, "\\app\Game 2\RehabGame1Package");
+            path += "\\app\\Game 2\\RehabGame2Package.exe";
             //Process.Start(path);
-            
-           
+             Process.Start("D:\\Program\\ImageToPDForXPS.exe");
+            this.WindowState = FormWindowState.Minimized;
+            while (Process.GetProcessesByName("ImageToPDForXPS").Length > 0) ;
+           // while (Process.GetProcessesByName("RehabGame2Package").Length > 0) ;
+            this.WindowState = FormWindowState.Normal;
         }
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
