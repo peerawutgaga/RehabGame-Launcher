@@ -40,7 +40,12 @@ namespace WindowsFormsApplication1
 
         private void birthdayBox_TextChanged(object sender, EventArgs e)
         {
-           
+            int d;
+            if((!int.TryParse(birthdayBox.Text, out d))&&birthdayBox.Text!="")
+            {
+                MessageBox.Show("Birthday must be integer", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                birthdayBox.Text = "";
+            }
         }
         private void birthdayBox_click(object sender, EventArgs e)
         {
@@ -49,6 +54,16 @@ namespace WindowsFormsApplication1
         private void birthyearBox_click(object sender, EventArgs e)
         {
             birthyearBox.Text = "";
+        }
+
+        private void birthyearBox_TextChanged(object sender, EventArgs e)
+        {
+            int d;
+            if ((!int.TryParse(birthyearBox.Text, out d)) && birthyearBox.Text != "")
+            {
+                MessageBox.Show("Birthyear must be integer", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                birthyearBox.Text = "";
+            }
         }
     }
 }
