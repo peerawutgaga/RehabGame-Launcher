@@ -19,6 +19,13 @@ namespace WindowsFormsApplication1
 
         private void AddButton_Click(object sender, EventArgs e)
         {
+            string writeData = sexSelector.Text + " " + nameBox.Text+" "+surnameBox.Text+" "
+                +birthdayBox.Text+" "+birthmonthSelector.Text+" "+birthyearBox.Text ; 
+            using (System.IO.StreamWriter file =
+            new System.IO.StreamWriter(@"D:\\WriteLines2.txt", true))
+            {
+                file.WriteLine(writeData);
+            }
             Close();
         }
 

@@ -41,11 +41,6 @@ namespace WindowsFormsApplication1
             this.WindowState = FormWindowState.Normal;
         }
 
-        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private void newButton_Click(object sender, EventArgs e)
         {
             Register r = new Register();

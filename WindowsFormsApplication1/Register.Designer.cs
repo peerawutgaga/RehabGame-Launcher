@@ -153,6 +153,19 @@
             // birthmonthSelector
             // 
             this.birthmonthSelector.FormattingEnabled = true;
+            this.birthmonthSelector.Items.AddRange(new object[] {
+            "January",
+            "Febuary",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"});
             this.birthmonthSelector.Location = new System.Drawing.Point(155, 174);
             this.birthmonthSelector.Name = "birthmonthSelector";
             this.birthmonthSelector.Size = new System.Drawing.Size(119, 21);
