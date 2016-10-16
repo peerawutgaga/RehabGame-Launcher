@@ -18,9 +18,24 @@ namespace WindowsFormsApplication1
         }
 
         private void AddButton_Click(object sender, EventArgs e)
-        {
-            string writeData = sexSelector.Text + " " + nameBox.Text+" "+surnameBox.Text+" "
-                +birthdayBox.Text+" "+birthmonthSelector.Text+" "+birthyearBox.Text ; 
+        {     
+            if (sexSelector.SelectedIndex < 0)
+            {
+                MessageBox.Show("Please select sex", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if(nameBox.Text == ""||surnameBox.Text == "")
+            {
+                MessageBox.Show("Name or Surname must not be blank", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!isValidBirthDay(birthdayBox.Text, birthmonthSelector.SelectedIndex, birthyearBox.Text))
+            {
+                MessageBox.Show("Birthday is not appropriate", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string writeData = sexSelector.Text + " " + nameBox.Text + " " + surnameBox.Text + " "
+                + birthdayBox.Text + " " +( birthmonthSelector.SelectedIndex+1) + " " + birthyearBox.Text;
             using (System.IO.StreamWriter file =
             new System.IO.StreamWriter(@"D:\\WriteLines2.txt", true))
             {
@@ -28,8 +43,31 @@ namespace WindowsFormsApplication1
             }
             Close();
         }
-
-        private void cancelButton_Click(object sender, EventArgs e)
+        private bool isValidBirthDay(string day, int m, string year)
+        {
+            int[] dList = new int[12] { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+            int d, y;
+            if(!int.TryParse(day, out d)||!int.TryParse(year, out y)) return false;     
+            if (m < 0) return false;
+            if (d > dList[m]||d<1)   return false;
+            if (m == 1) //checking is leap year for febuary
+            {
+                bool l = isLeapYear(y);
+                if (l && d>29)                
+                    return false;    
+                else if ((!l) && d > 28)              
+                    return false;    
+            }
+            return true;
+        }
+        private bool isLeapYear(int y)
+        {
+            if (y % 400 == 0) return true;
+            if (y % 100 == 0) return false;
+            if (y % 4 == 0) return true;
+            else return false;
+        }
+       private void cancelButton_Click(object sender, EventArgs e)
         {
             Close();
         }
@@ -40,11 +78,12 @@ namespace WindowsFormsApplication1
 
         private void birthdayBox_TextChanged(object sender, EventArgs e)
         {
-            int d;
-            if((!int.TryParse(birthdayBox.Text, out d))&&birthdayBox.Text!="")
+            int d = 0;
+            if ((!int.TryParse(birthdayBox.Text, out d)) && birthdayBox.Text != "")
             {
                 MessageBox.Show("Birthday must be integer", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 birthdayBox.Text = "";
+                return;
             }
         }
         private void birthdayBox_click(object sender, EventArgs e)
