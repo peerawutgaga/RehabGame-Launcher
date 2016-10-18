@@ -47,5 +47,10 @@ namespace WindowsFormsApplication1
             Register r = new Register();
             r.Show();
         }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
