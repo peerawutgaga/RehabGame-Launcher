@@ -24,8 +24,9 @@ namespace WindowsFormsApplication1
             var path = Directory.GetCurrentDirectory();
             path += "\\app\\Game 1\\RehabGame1Package.exe";
             //Process.Start(path);
+            Process.Start("C:\\Users\\peerawut\\Documents\\Game 1\\WindowsNoEditor\\RehabGame1Package.exe");
             this.WindowState = FormWindowState.Minimized;
-            // while (Process.GetProcessesByName("RehabGame1Package").Length > 0) ;
+             while (Process.GetProcessesByName("RehabGame1Package").Length > 0) ;
             this.WindowState = FormWindowState.Normal;     
         }
 
@@ -34,10 +35,10 @@ namespace WindowsFormsApplication1
             var path = Directory.GetCurrentDirectory();
             path += "\\app\\Game 2\\RehabGame2Package.exe";
             //Process.Start(path);
-             Process.Start("D:\\Program\\ImageToPDForXPS.exe");
+            Process.Start("C:\\Users\\peerawut\\Documents\\Game 2\\WindowsNoEditor\\RehabGame2Package.exe");
             this.WindowState = FormWindowState.Minimized;
-            while (Process.GetProcessesByName("ImageToPDForXPS").Length > 0) ;
-           // while (Process.GetProcessesByName("RehabGame2Package").Length > 0) ;
+            //while (Process.GetProcessesByName("ImageToPDForXPS").Length > 0) ;
+           while (Process.GetProcessesByName("RehabGame2Package").Length > 0) ;
             this.WindowState = FormWindowState.Normal;
         }
 

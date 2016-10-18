@@ -37,7 +37,7 @@ namespace WindowsFormsApplication1
             string writeData = sexSelector.Text + " " + nameBox.Text + " " + surnameBox.Text + " "
                 + birthdayBox.Text + " " +( birthmonthSelector.SelectedIndex+1) + " " + birthyearBox.Text;
             using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(@"D:\\WriteLines2.txt", true))
+            new System.IO.StreamWriter(@"C:\\Users\\peerawut\\Documents\\userdata.txt", true))
             {
                 file.WriteLine(writeData);
             }
