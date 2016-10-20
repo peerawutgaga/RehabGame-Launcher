@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,12 +22,12 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var path = Directory.GetCurrentDirectory();
+            string path = Directory.GetCurrentDirectory();
             path += "\\app\\Game 1\\RehabGame1Package.exe";
-            //Process.Start(path);
-            Process.Start("C:\\Users\\peerawut\\Documents\\Game 1\\WindowsNoEditor\\RehabGame1Package.exe");
+            // Process gameProcess = Process.Start(path);
+            //Process gameProcess = Process.Start("C:\\Users\\peerawut\\Documents\\Game 1\\WindowsNoEditor\\RehabGame1Package.exe");
             this.WindowState = FormWindowState.Minimized;
-             while (Process.GetProcessesByName("RehabGame1Package").Length > 0) ;
+            //gameProcess.WaitForExit();
             this.WindowState = FormWindowState.Normal;     
         }
 
@@ -34,11 +35,10 @@ namespace WindowsFormsApplication1
         {
             var path = Directory.GetCurrentDirectory();
             path += "\\app\\Game 2\\RehabGame2Package.exe";
-            //Process.Start(path);
-            Process.Start("C:\\Users\\peerawut\\Documents\\Game 2\\WindowsNoEditor\\RehabGame2Package.exe");
+            // Process gameProcess = Process.Start(path);
+            // Process gameProcess = Process.Start("C:\\Users\\peerawut\\Documents\\Game 2\\WindowsNoEditor\\RehabGame2Package.exe");
             this.WindowState = FormWindowState.Minimized;
-            //while (Process.GetProcessesByName("ImageToPDForXPS").Length > 0) ;
-           while (Process.GetProcessesByName("RehabGame2Package").Length > 0) ;
+            //gameProcess.WaitForExit();
             this.WindowState = FormWindowState.Normal;
         }
 
