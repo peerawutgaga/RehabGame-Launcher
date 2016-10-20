@@ -41,7 +41,11 @@ namespace WindowsFormsApplication1
             //gameProcess.WaitForExit();
             this.WindowState = FormWindowState.Normal;
         }
-
+        private void runButton(object sender, EventArgs e)
+        {
+            string send = sender.ToString();
+            label1.Text = send;
+        }
         private void newButton_Click(object sender, EventArgs e)
         {
             Register r = new Register();
