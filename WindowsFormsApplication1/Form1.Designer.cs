@@ -67,11 +67,11 @@
             // 
             // newButton
             // 
-            this.newButton.Location = new System.Drawing.Point(77, 437);
+            this.newButton.Location = new System.Drawing.Point(77, 432);
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(182, 27);
             this.newButton.TabIndex = 4;
-            this.newButton.Text = "New";
+            this.newButton.Text = "ลงทะเบียนผู้ป่วยใหม่";
             this.newButton.UseVisualStyleBackColor = true;
             this.newButton.Click += new System.EventHandler(this.newButton_Click);
             // 
@@ -96,7 +96,7 @@
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "RehabGame Launcher";
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

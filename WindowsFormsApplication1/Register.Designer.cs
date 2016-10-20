@@ -65,7 +65,7 @@
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 2;
-            this.cancelButton.Text = "Cancel";
+            this.cancelButton.Text = "ยกเลิก";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
@@ -75,7 +75,7 @@
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(75, 23);
             this.AddButton.TabIndex = 3;
-            this.AddButton.Text = "Add";
+            this.AddButton.Text = "เพิ่ม";
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
