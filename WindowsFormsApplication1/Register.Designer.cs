@@ -35,23 +35,26 @@
             this.banner = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
             this.surnameLabel = new System.Windows.Forms.Label();
-            this.sexSelector = new System.Windows.Forms.ComboBox();
             this.birthdayLabel = new System.Windows.Forms.Label();
             this.birthdayBox = new System.Windows.Forms.TextBox();
             this.birthyearBox = new System.Windows.Forms.TextBox();
             this.birthmonthSelector = new System.Windows.Forms.ComboBox();
+            this.mr = new System.Windows.Forms.RadioButton();
+            this.sexLabel = new System.Windows.Forms.Label();
+            this.ms = new System.Windows.Forms.RadioButton();
+            this.mrs = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // nameBox
             // 
-            this.nameBox.Location = new System.Drawing.Point(155, 92);
+            this.nameBox.Location = new System.Drawing.Point(94, 124);
             this.nameBox.Name = "nameBox";
-            this.nameBox.Size = new System.Drawing.Size(193, 20);
+            this.nameBox.Size = new System.Drawing.Size(254, 20);
             this.nameBox.TabIndex = 0;
             // 
             // surnameBox
             // 
-            this.surnameBox.Location = new System.Drawing.Point(94, 130);
+            this.surnameBox.Location = new System.Drawing.Point(94, 162);
             this.surnameBox.Name = "surnameBox";
             this.surnameBox.Size = new System.Drawing.Size(254, 20);
             this.surnameBox.TabIndex = 1;
@@ -82,71 +85,57 @@
             this.banner.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.banner.Location = new System.Drawing.Point(107, 23);
             this.banner.Name = "banner";
-            this.banner.Size = new System.Drawing.Size(186, 31);
+            this.banner.Size = new System.Drawing.Size(222, 31);
             this.banner.TabIndex = 4;
-            this.banner.Text = "Register Form";
+            this.banner.Text = "ลงทะเบียนผู้ป่วยใหม่";
             // 
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(13, 92);
+            this.nameLabel.Location = new System.Drawing.Point(16, 124);
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(35, 13);
+            this.nameLabel.Size = new System.Drawing.Size(20, 13);
             this.nameLabel.TabIndex = 5;
-            this.nameLabel.Text = "Name";
+            this.nameLabel.Text = "ชื่อ";
             // 
             // surnameLabel
             // 
             this.surnameLabel.AutoSize = true;
-            this.surnameLabel.Location = new System.Drawing.Point(13, 130);
+            this.surnameLabel.Location = new System.Drawing.Point(12, 162);
             this.surnameLabel.Name = "surnameLabel";
-            this.surnameLabel.Size = new System.Drawing.Size(49, 13);
+            this.surnameLabel.Size = new System.Drawing.Size(46, 13);
             this.surnameLabel.TabIndex = 6;
-            this.surnameLabel.Text = "Surname";
-            // 
-            // sexSelector
-            // 
-            this.sexSelector.FormattingEnabled = true;
-            this.sexSelector.Items.AddRange(new object[] {
-            "Mr.",
-            "Ms.",
-            "Mrs."});
-            this.sexSelector.Location = new System.Drawing.Point(94, 89);
-            this.sexSelector.Name = "sexSelector";
-            this.sexSelector.Size = new System.Drawing.Size(55, 21);
-            this.sexSelector.TabIndex = 7;
-            this.sexSelector.Text = "-Sex-";
-            this.sexSelector.SelectedIndexChanged += new System.EventHandler(this.sexSelector_SelectedIndexChanged);
+            this.surnameLabel.Text = "นามสกุล";
             // 
             // birthdayLabel
             // 
             this.birthdayLabel.AutoSize = true;
-            this.birthdayLabel.Location = new System.Drawing.Point(13, 178);
+            this.birthdayLabel.Location = new System.Drawing.Point(12, 197);
             this.birthdayLabel.Name = "birthdayLabel";
-            this.birthdayLabel.Size = new System.Drawing.Size(45, 13);
+            this.birthdayLabel.Size = new System.Drawing.Size(73, 13);
             this.birthdayLabel.TabIndex = 9;
-            this.birthdayLabel.Text = "Birthday";
+            this.birthdayLabel.Text = "วันเดือนปีเกิด";
             // 
             // birthdayBox
             // 
-            this.birthdayBox.Location = new System.Drawing.Point(94, 175);
+            this.birthdayBox.Location = new System.Drawing.Point(94, 197);
             this.birthdayBox.Multiline = true;
             this.birthdayBox.Name = "birthdayBox";
             this.birthdayBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.birthdayBox.Size = new System.Drawing.Size(55, 20);
             this.birthdayBox.TabIndex = 10;
-            this.birthdayBox.Text = "-Day-";
+            this.birthdayBox.Text = "-วัน-";
             this.birthdayBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.birthdayBox.Click += new System.EventHandler(this.birthdayBox_click);
             this.birthdayBox.TextChanged += new System.EventHandler(this.birthdayBox_TextChanged);
             // 
             // birthyearBox
             // 
-            this.birthyearBox.Location = new System.Drawing.Point(280, 175);
+            this.birthyearBox.Location = new System.Drawing.Point(281, 198);
             this.birthyearBox.Name = "birthyearBox";
             this.birthyearBox.Size = new System.Drawing.Size(67, 20);
             this.birthyearBox.TabIndex = 12;
-            this.birthyearBox.Text = "-Year-";
+            this.birthyearBox.Text = "-ปี-";
             this.birthyearBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.birthyearBox.Click += new System.EventHandler(this.birthyearBox_click);
             this.birthyearBox.TextChanged += new System.EventHandler(this.birthyearBox_TextChanged);
@@ -155,34 +144,79 @@
             // 
             this.birthmonthSelector.FormattingEnabled = true;
             this.birthmonthSelector.Items.AddRange(new object[] {
-            "January",
-            "Febuary",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December"});
-            this.birthmonthSelector.Location = new System.Drawing.Point(155, 174);
+            "มกราคม",
+            "กุมภาพันธ์",
+            "มีนาคม",
+            "เมษายน",
+            "พฤศภาคม",
+            "มิถุนายน",
+            "กรกฎาคม",
+            "สิงหาคม",
+            "กันยายน",
+            "ตุลาคม",
+            "พฤษจิการยน",
+            "ธันวาคม"});
+            this.birthmonthSelector.Location = new System.Drawing.Point(155, 197);
             this.birthmonthSelector.Name = "birthmonthSelector";
             this.birthmonthSelector.Size = new System.Drawing.Size(119, 21);
             this.birthmonthSelector.TabIndex = 14;
-            this.birthmonthSelector.Text = "-Month-";
+            this.birthmonthSelector.Text = "-เดือน-";
+            // 
+            // mr
+            // 
+            this.mr.AutoSize = true;
+            this.mr.Location = new System.Drawing.Point(94, 90);
+            this.mr.Name = "mr";
+            this.mr.Size = new System.Drawing.Size(45, 17);
+            this.mr.TabIndex = 15;
+            this.mr.TabStop = true;
+            this.mr.Text = "นาย";
+            this.mr.UseVisualStyleBackColor = true;
+            // 
+            // sexLabel
+            // 
+            this.sexLabel.AutoSize = true;
+            this.sexLabel.Location = new System.Drawing.Point(16, 90);
+            this.sexLabel.Name = "sexLabel";
+            this.sexLabel.Size = new System.Drawing.Size(28, 13);
+            this.sexLabel.TabIndex = 16;
+            this.sexLabel.Text = "เพศ";
+            // 
+            // ms
+            // 
+            this.ms.AutoSize = true;
+            this.ms.Location = new System.Drawing.Point(214, 90);
+            this.ms.Name = "ms";
+            this.ms.Size = new System.Drawing.Size(60, 17);
+            this.ms.TabIndex = 17;
+            this.ms.TabStop = true;
+            this.ms.Text = "นางสาว";
+            this.ms.UseVisualStyleBackColor = true;
+            // 
+            // mrs
+            // 
+            this.mrs.AutoSize = true;
+            this.mrs.Location = new System.Drawing.Point(155, 90);
+            this.mrs.Name = "mrs";
+            this.mrs.Size = new System.Drawing.Size(43, 17);
+            this.mrs.TabIndex = 18;
+            this.mrs.TabStop = true;
+            this.mrs.Text = "นาง";
+            this.mrs.UseVisualStyleBackColor = true;
             // 
             // Register
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(391, 529);
+            this.Controls.Add(this.mrs);
+            this.Controls.Add(this.ms);
+            this.Controls.Add(this.sexLabel);
+            this.Controls.Add(this.mr);
             this.Controls.Add(this.birthmonthSelector);
             this.Controls.Add(this.birthyearBox);
             this.Controls.Add(this.birthdayBox);
             this.Controls.Add(this.birthdayLabel);
-            this.Controls.Add(this.sexSelector);
             this.Controls.Add(this.surnameLabel);
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.banner);
@@ -206,10 +240,13 @@
         private System.Windows.Forms.Label banner;
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.Label surnameLabel;
-        private System.Windows.Forms.ComboBox sexSelector;
         private System.Windows.Forms.Label birthdayLabel;
         private System.Windows.Forms.TextBox birthdayBox;
         private System.Windows.Forms.TextBox birthyearBox;
         private System.Windows.Forms.ComboBox birthmonthSelector;
+        private System.Windows.Forms.RadioButton mr;
+        private System.Windows.Forms.Label sexLabel;
+        private System.Windows.Forms.RadioButton ms;
+        private System.Windows.Forms.RadioButton mrs;
     }
 }

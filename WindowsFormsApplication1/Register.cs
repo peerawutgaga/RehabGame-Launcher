@@ -18,26 +18,31 @@ namespace WindowsFormsApplication1
         }
 
         private void AddButton_Click(object sender, EventArgs e)
-        {     
-            if (sexSelector.SelectedIndex < 0)
+        {
+            string sex = sexDefine();
+            if(sex == "")
             {
-                MessageBox.Show("Please select sex", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("กรุณาระบุคำนำหน้าชื่อ", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }
+            }           
             if(nameBox.Text == ""||surnameBox.Text == "")
             {
-                MessageBox.Show("Name or Surname must not be blank", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("ห้ามเว้นว่างชื่อหรือนามสกุล", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (!isValidBirthDay(birthdayBox.Text, birthmonthSelector.SelectedIndex, birthyearBox.Text))
             {
-                MessageBox.Show("Birthday is not appropriate", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("รูปแบบของวันเกิดผิด", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            string writeData = sexSelector.Text + " " + nameBox.Text + " " + surnameBox.Text + " "
+            string writeData = sex + " " + nameBox.Text + " " + surnameBox.Text + " "
                 + birthdayBox.Text + " " +( birthmonthSelector.SelectedIndex+1) + " " + birthyearBox.Text;
-            using (System.IO.StreamWriter file =
+            /*using (System.IO.StreamWriter file =
             new System.IO.StreamWriter(@"C:\\Users\\peerawut\\Documents\\userdata.txt", true))
+            {
+                file.WriteLine(writeData);
+            }*/
+            using(System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\\userdata.txt", true))
             {
                 file.WriteLine(writeData);
             }
@@ -52,6 +57,7 @@ namespace WindowsFormsApplication1
             if (d > dList[m]||d<1)   return false;
             if (m == 1) //checking is leap year for febuary
             {
+                y -= 543;
                 bool l = isLeapYear(y);
                 if (l && d>29)                
                     return false;    
@@ -71,17 +77,13 @@ namespace WindowsFormsApplication1
         {
             Close();
         }
-        private void sexSelector_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void birthdayBox_TextChanged(object sender, EventArgs e)
         {
             int d = 0;
             if ((!int.TryParse(birthdayBox.Text, out d)) && birthdayBox.Text != "")
             {
-                MessageBox.Show("Birthday must be integer", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("วันที่ต้องเป็นตัวเลขเท่านั้น", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 birthdayBox.Text = "";
                 return;
             }
@@ -100,8 +102,27 @@ namespace WindowsFormsApplication1
             int d;
             if ((!int.TryParse(birthyearBox.Text, out d)) && birthyearBox.Text != "")
             {
-                MessageBox.Show("Birthyear must be integer", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("ปีเกิดต้องเป็นจำนวนเต็มเท่านั้น", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 birthyearBox.Text = "";
+            }
+        }
+        private string sexDefine()
+        {
+            if (mr.Checked)
+            {
+                return ("นาย");
+            }
+            if (ms.Checked)
+            {
+                return ("นางสาว");
+            }
+            if (mrs.Checked)
+            {
+                return ("นาง");
+            }
+           else
+            {
+                return "";
             }
         }
     }
