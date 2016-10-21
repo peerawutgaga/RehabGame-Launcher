@@ -19,6 +19,8 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
             loadButton();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -54,8 +56,8 @@ namespace WindowsFormsApplication1
         }
         private void loadButton()
         {
-            int x = 20;
-            int y = 20;
+            int x = this.Width/2 + 50;
+            int y = this.Height/4;
             for (int i = 0; i < 10; i++)
             {
                 Button b = new Button();
