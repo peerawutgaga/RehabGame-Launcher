@@ -22,31 +22,13 @@ namespace WindowsFormsApplication1
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string path = Directory.GetCurrentDirectory();
-            path += "\\app\\Game 1\\RehabGame1Package.exe";
-            // Process gameProcess = Process.Start(path);
-            //Process gameProcess = Process.Start("C:\\Users\\peerawut\\Documents\\Game 1\\WindowsNoEditor\\RehabGame1Package.exe");
-            this.WindowState = FormWindowState.Minimized;
-            //gameProcess.WaitForExit();
-            this.WindowState = FormWindowState.Normal;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            var path = Directory.GetCurrentDirectory();
-            path += "\\app\\Game 2\\RehabGame2Package.exe";
-            // Process gameProcess = Process.Start(path);
-            // Process gameProcess = Process.Start("C:\\Users\\peerawut\\Documents\\Game 2\\WindowsNoEditor\\RehabGame2Package.exe");
-            this.WindowState = FormWindowState.Minimized;
-            //gameProcess.WaitForExit();
-            this.WindowState = FormWindowState.Normal;
-        }
         private void runButton(object sender, EventArgs e)
         {
-            Button b = sender as Button;
+            GameButton b = sender as GameButton;
+            Process p = Process.Start(b.GetPath());
+            this.WindowState = FormWindowState.Minimized;
+            p.WaitForExit();
+            this.WindowState = FormWindowState.Normal;
 
         }
         private void newButton_Click(object sender, EventArgs e)
@@ -63,6 +45,7 @@ namespace WindowsFormsApplication1
             for (int i = 0; i < lines.Length; i++)
             {
                 GameButton b = new GameButton(lines[i]);
+                b.Click += new EventHandler(runButton);
                 b.Width = s;
                 b.Height = s;
                 b.Left = x;
