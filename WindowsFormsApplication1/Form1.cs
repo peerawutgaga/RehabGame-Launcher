@@ -18,6 +18,7 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+            loadButton();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -43,13 +44,28 @@ namespace WindowsFormsApplication1
         }
         private void runButton(object sender, EventArgs e)
         {
-            string send = sender.ToString();
-            label1.Text = send;
+            Button b = sender as Button;
+           
         }
         private void newButton_Click(object sender, EventArgs e)
         {
             Register r = new Register();
             r.Show();
+        }
+        private void loadButton()
+        {
+            int x = 20;
+            int y = 20;
+            for (int i = 0; i < 10; i++)
+            {
+                Button b = new Button();
+                b.Height = 20;
+                b.Width = 20;
+                b.Left = x;
+                b.Top = y;
+                this.Controls.Add(b);
+                x += 20;
+            }
         }
     }
 }
