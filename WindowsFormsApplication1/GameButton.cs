@@ -1,23 +1,14 @@
-﻿using System;
-using System.IO;
+﻿using System.Windows.Forms;
 
-public class GameButton
+namespace WindowsFormsApplication1
 {
-    private string name;
-    private string path;
-    public GameButton(string name)
+    internal class GameButton : Button
     {
-        this.name = name;
-        this.path = Directory.GetCurrentDirectory();
-        path += "\\app\\" + name + "\\" + name + ".exe";
+
+        public GameButton(string v)  : base()
+        {
+            this.Name = v;
+            this.Text = v;
+        }
     }
-    public string getName()
-    {
-        return this.name;
-    }
-    public string getPath()
-    {
-        return this.path;
-    }
-    
 }

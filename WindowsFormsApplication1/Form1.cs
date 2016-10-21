@@ -31,7 +31,7 @@ namespace WindowsFormsApplication1
             //Process gameProcess = Process.Start("C:\\Users\\peerawut\\Documents\\Game 1\\WindowsNoEditor\\RehabGame1Package.exe");
             this.WindowState = FormWindowState.Minimized;
             //gameProcess.WaitForExit();
-            this.WindowState = FormWindowState.Normal;     
+            this.WindowState = FormWindowState.Normal;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -47,7 +47,7 @@ namespace WindowsFormsApplication1
         private void runButton(object sender, EventArgs e)
         {
             Button b = sender as Button;
-           
+
         }
         private void newButton_Click(object sender, EventArgs e)
         {
@@ -56,18 +56,40 @@ namespace WindowsFormsApplication1
         }
         private void loadButton()
         {
-            int x = this.Width/2 + 50;
-            int y = this.Height/4;
-            for (int i = 0; i < 10; i++)
+            int x = this.Width / 2 + 50;
+            int y = this.Height / 6;
+            int s = 80;
+            string[] lines = File.ReadAllLines(@"D:\\gamelist.txt");
+            for (int i = 0; i < lines.Length; i++)
             {
-                Button b = new Button();
-                b.Height = 20;
-                b.Width = 20;
+                GameButton b = new GameButton(lines[i]);
+                b.Width = s;
+                b.Height = s;
                 b.Left = x;
                 b.Top = y;
-                this.Controls.Add(b);
-                x += 20;
+                Controls.Add(b);
+                if ((i + 1) % 3 == 0)
+                {
+                    x = this.Width / 2 + 50;
+                    y += s;
+                }
+                else
+                {
+                    x += s;
+                }
             }
+            Button addGame = new Button();
+            addGame.Text = "Add new game";
+            addGame.Left = x;
+            addGame.Top = y;
+            addGame.Width = s;
+            addGame.Height = s;
+            addGame.Click += new EventHandler(addGame_click);
+            Controls.Add(addGame);
+        }
+        private void addGame_click(object sender, EventArgs e)
+        {
+
         }
     }
 }
