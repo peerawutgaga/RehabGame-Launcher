@@ -72,7 +72,8 @@ namespace WindowsFormsApplication1
         }
         private void addGame_click(object sender, EventArgs e)
         {
-
+            Add_Software a = new Add_Software();
+            a.Show();
         }
     }
 }
