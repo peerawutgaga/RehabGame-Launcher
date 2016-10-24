@@ -22,9 +22,7 @@ namespace WindowsFormsApplication1
             OpenFileDialog op = new OpenFileDialog();
             if (op.ShowDialog() == DialogResult.OK)
             {
-                System.IO.StreamReader sr = new System.IO.StreamReader(op.FileName);
-                label1.Text = sr.ReadToEnd();
-                sr.Close();
+               
             }
             
         }
