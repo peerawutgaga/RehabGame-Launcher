@@ -54,11 +54,11 @@ namespace WindowsFormsApplication1
                 if ((i + 1) % 3 == 0)
                 {
                     x = this.Width / 2 + 50;
-                    y += s;
+                    y += s+10;
                 }
                 else
                 {
-                    x += s;
+                    x += s+10;
                 }
             }
             Button addGame = new Button();
