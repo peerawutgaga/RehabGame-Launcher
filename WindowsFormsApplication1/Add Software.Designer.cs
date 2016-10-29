@@ -121,6 +121,7 @@
             this.customLocationButton.TabIndex = 7;
             this.customLocationButton.Text = "เลือก";
             this.customLocationButton.UseVisualStyleBackColor = true;
+            this.customLocationButton.Click += new System.EventHandler(this.customLocationButton_Click);
             // 
             // customLocationLabel
             // 

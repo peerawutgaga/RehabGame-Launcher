@@ -15,6 +15,8 @@ namespace WindowsFormsApplication1
         public Register()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
         }
 
         private void AddButton_Click(object sender, EventArgs e)
