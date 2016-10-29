@@ -10,11 +10,14 @@ namespace WindowsFormsApplication1
         {
             this.Name = v;
             this.Text = v;
-            path += "\\Apps\\" + v + "\\" + v + ".exe";
         }
         public string GetPath()
         {
             return path;
+        }
+        public void setPath(string p)
+        {
+            path = p;
         }
     }
 }
