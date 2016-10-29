@@ -41,17 +41,19 @@ namespace WindowsFormsApplication1
             int x = this.Width / 2 + 50;
             int y = this.Height / 6;
             int s = 80;
+            int idx = 0;
             string[] lines = File.ReadAllLines(@"D:\\gamelist.txt");
-            for (int i = 0; i < lines.Length; i++)
+            for (int i = 0; i < lines.Length; i += 2)
             {
                 GameButton b = new GameButton(lines[i]);
+                b.setPath(lines[i + 1]);
                 b.Click += new EventHandler(runButton);
                 b.Width = s;
                 b.Height = s;
                 b.Left = x;
                 b.Top = y;
                 Controls.Add(b);
-                if ((i + 1) % 3 == 0)
+                if ((idx + 1) % 3 == 0)
                 {
                     x = this.Width / 2 + 50;
                     y += s+10;
@@ -60,6 +62,7 @@ namespace WindowsFormsApplication1
                 {
                     x += s+10;
                 }
+                idx++;
             }
             Button addGame = new Button();
             addGame.Text = "Add new game";
