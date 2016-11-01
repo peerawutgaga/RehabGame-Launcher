@@ -42,7 +42,8 @@ namespace WindowsFormsApplication1
             int y = this.Height / 6;
             int s = 80;
             int idx = 0;
-            string[] lines = File.ReadAllLines(@"D:\\gamelist.txt");
+            // string[] lines = File.ReadAllLines(@"D:\\gamelist.txt");
+            string[] lines = File.ReadAllLines(@"C:\\Users\\peerawut\\Documents\\gamelist.txt");
             for (int i = 0; i < lines.Length; i += 2)
             {
                 GameButton b = new GameButton(lines[i]);
