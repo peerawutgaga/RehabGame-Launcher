@@ -39,15 +39,15 @@ namespace WindowsFormsApplication1
             }
             string writeData = sex + " " + nameBox.Text + " " + surnameBox.Text + " "
                 + birthdayBox.Text + " " +( birthmonthSelector.SelectedIndex+1) + " " + birthyearBox.Text;
-            /*using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(@"C:\\Users\\peerawut\\Documents\\userdata.txt", true))
-            {
-                file.WriteLine(writeData);
-            }*/
-            using(System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\\userdata.txt", true))
+            using (System.IO.StreamWriter file =
+            new System.IO.StreamWriter(@"C:\\Users\\Peerawut\\Documents\\userdata.txt", true))
             {
                 file.WriteLine(writeData);
             }
+           /* using(System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\\userdata.txt", true))
+            {
+                file.WriteLine(writeData);
+            }*/
             Close();
         }
         private bool isValidBirthDay(string day, int m, string year)

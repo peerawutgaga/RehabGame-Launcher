@@ -15,9 +15,13 @@ namespace WindowsFormsApplication1
 {
     public partial class MainWindow : Form
     {
+        private List<GameButton> bs = new List<GameButton>();
+        private Button addGame = new Button();
         public MainWindow()
         {
             InitializeComponent();
+            addGame.Text = "Add new game";
+            addGame.Click += new EventHandler(addGame_click);
             loadButton();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -34,7 +38,14 @@ namespace WindowsFormsApplication1
         private void newButton_Click(object sender, EventArgs e)
         {
             Register r = new Register();
+            r.FormClosing += new FormClosingEventHandler(this.form_closeing);
             r.Show();
+        }
+        private void form_closeing(object sender, FormClosingEventArgs e)
+        {
+            bs.Clear();
+            Controls.Remove(addGame);
+            loadButton();
         }
         private void loadButton()
         {
@@ -43,7 +54,7 @@ namespace WindowsFormsApplication1
             int s = 80;
             int idx = 0;
             // string[] lines = File.ReadAllLines(@"D:\\gamelist.txt");
-            string[] lines = File.ReadAllLines(@"C:\\Users\\peerawut\\Documents\\gamelist.txt");
+            string[] lines = File.ReadAllLines(@"C:\\Users\\Peerawut\\Documents\\gamelist.txt");
             for (int i = 0; i < lines.Length; i += 2)
             {
                 GameButton b = new GameButton(lines[i]);
@@ -53,7 +64,7 @@ namespace WindowsFormsApplication1
                 b.Height = s;
                 b.Left = x;
                 b.Top = y;
-                Controls.Add(b);
+                bs.Add(b);
                 if ((idx + 1) % 3 == 0)
                 {
                     x = this.Width / 2 + 50;
@@ -65,18 +76,25 @@ namespace WindowsFormsApplication1
                 }
                 idx++;
             }
-            Button addGame = new Button();
-            addGame.Text = "Add new game";
             addGame.Left = x;
             addGame.Top = y;
             addGame.Width = s;
             addGame.Height = s;
-            addGame.Click += new EventHandler(addGame_click);
+            addbuttontoform();
+            
+        }
+        private void addbuttontoform()
+        {
+            foreach(GameButton b in bs)
+            {
+                Controls.Add(b);
+            }
             Controls.Add(addGame);
         }
         private void addGame_click(object sender, EventArgs e)
         {
             Add_Software a = new Add_Software();
+            a.FormClosing += new FormClosingEventHandler(this.form_closeing);
             a.Show();
         }
     }
