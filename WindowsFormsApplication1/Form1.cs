@@ -38,10 +38,14 @@ namespace WindowsFormsApplication1
         private void newButton_Click(object sender, EventArgs e)
         {
             Register r = new Register();
-            r.FormClosing += new FormClosingEventHandler(this.form_closeing);
+            r.FormClosing += new FormClosingEventHandler(this.registerForm_closeing);
             r.Show();
         }
-        private void form_closeing(object sender, FormClosingEventArgs e)
+        private void registerForm_closeing(object sender, FormClosingEventArgs e)
+        {
+           
+        }
+        private void addSoftwareForm_closeing(object sender, FormClosingEventArgs e)
         {
             bs.Clear();
             Controls.Remove(addGame);
@@ -94,7 +98,7 @@ namespace WindowsFormsApplication1
         private void addGame_click(object sender, EventArgs e)
         {
             Add_Software a = new Add_Software();
-            a.FormClosing += new FormClosingEventHandler(this.form_closeing);
+            a.FormClosing += new FormClosingEventHandler(this.addSoftwareForm_closeing);
             a.Show();
         }
     }

@@ -12,6 +12,7 @@ namespace WindowsFormsApplication1
 {
     public partial class Register : Form
     {
+        private PatientData pd;
         public Register()
         {
             InitializeComponent();
@@ -21,52 +22,19 @@ namespace WindowsFormsApplication1
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            string sex = sexDefine();
-            if(sex == "")
+            pd = new PatientData(sexDefine(),nameBox.Text,surnameBox.Text);
+            if (!checkBirthdayFormat())
             {
-                MessageBox.Show("กรุณาระบุคำนำหน้าชื่อ", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }           
-            if(nameBox.Text == ""||surnameBox.Text == "")
-            {
-                MessageBox.Show("ห้ามเว้นว่างชื่อหรือนามสกุล", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (!isValidBirthDay(birthdayBox.Text, birthmonthSelector.SelectedIndex, birthyearBox.Text))
+            int d = int.Parse(birthdayBox.Text);
+            int y = int.Parse(birthyearBox.Text);
+            pd.setBirthDay(d, birthmonthSelector.SelectedIndex, y);
+            if (!checkData(pd))
             {
-                MessageBox.Show("รูปแบบของวันเกิดผิด", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            string writeData = sex + " " + nameBox.Text + " " + surnameBox.Text + " "
-                + birthdayBox.Text + " " +( birthmonthSelector.SelectedIndex+1) + " " + birthyearBox.Text;
-            using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(@"C:\\Users\\Peerawut\\Documents\\userdata.txt", true))
-            {
-                file.WriteLine(writeData);
-            }
-           /* using(System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\\userdata.txt", true))
-            {
-                file.WriteLine(writeData);
-            }*/
             Close();
-        }
-        private bool isValidBirthDay(string day, int m, string year)
-        {
-            int[] dList = new int[12] { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-            int d, y;
-            if(!int.TryParse(day, out d)||!int.TryParse(year, out y)) return false;     
-            if (m < 0) return false;
-            if (d > dList[m]||d<1)   return false;
-            if (m == 1) //checking is leap year for febuary
-            {
-                y -= 543;
-                bool l = isLeapYear(y);
-                if (l && d>29)                
-                    return false;    
-                else if ((!l) && d > 28)              
-                    return false;    
-            }
-            return true;
         }
         private bool isLeapYear(int y)
         {
@@ -126,6 +94,71 @@ namespace WindowsFormsApplication1
             {
                 return "";
             }
+        }
+        private void saveData()
+        {
+            
+        }
+        private bool checkData(PatientData pd)
+        {
+            string sex = pd.getSex() ;
+            if (sex == "")
+            {
+                MessageBox.Show("กรุณาระบุคำนำหน้าชื่อ", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (pd.getName() == "" || pd.getSurname() == "")
+            {
+                MessageBox.Show("ห้ามเว้นว่างชื่อหรือนามสกุล", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            int[] dList = new int[12] { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+            if (pd.getDay() > dList[pd.getMonth()] )
+            {
+                MessageBox.Show("วันเกิดที่กรอกเป็นไปไม่ได้", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (pd.getYear() < 2430)
+            {
+                MessageBox.Show("ปีเกิดที่กรอกเป็นไปไม่ได้", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (pd.getMonth() == 1) //checking is leap year for febuary
+            {
+                int y = pd.getYear() - 543;
+                bool leap = isLeapYear(y);
+                if (leap && pd.getDay() > 29)
+                {
+                    MessageBox.Show("วันเดือนปีเกิดผิดรูปแบบ leap 1", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                else if ((!leap) && pd.getDay() > 28)
+                {
+                    MessageBox.Show("วันเดือนปีเกิดผิดรูปแบบ leap 2", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            return true; 
+        }
+        private bool checkBirthdayFormat()
+        {
+            int d, y;
+            if (!int.TryParse(birthdayBox.Text, out d))
+            {
+                MessageBox.Show("กรุณากรอกวันเกิด", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (birthmonthSelector.SelectedIndex < 0)
+            {
+                MessageBox.Show("กรุณาเลือกเดือนเกิด", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (!int.TryParse(birthyearBox.Text, out y))
+            {
+                MessageBox.Show("กรุณากรอกปีเกิด (พ.ศ.)", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
         }
     }
 }

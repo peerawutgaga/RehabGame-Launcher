@@ -135,7 +135,7 @@
             this.birthyearBox.Name = "birthyearBox";
             this.birthyearBox.Size = new System.Drawing.Size(67, 20);
             this.birthyearBox.TabIndex = 12;
-            this.birthyearBox.Text = "-ปี-";
+            this.birthyearBox.Text = "-ปี (พ.ศ.)-";
             this.birthyearBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.birthyearBox.Click += new System.EventHandler(this.birthyearBox_click);
             this.birthyearBox.TextChanged += new System.EventHandler(this.birthyearBox_TextChanged);
