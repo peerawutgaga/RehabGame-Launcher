@@ -7,12 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
+
 
 namespace WindowsFormsApplication1
 {
     public partial class Register : Form
     {
         private PatientData pd;
+        Excel.Application xlApp;
+        Excel.Workbook xlWorkBook;
+        Excel.Worksheet xlWorkSheet;
+        Excel.Range xlRange;
         public Register()
         {
             InitializeComponent();
@@ -27,6 +33,7 @@ namespace WindowsFormsApplication1
             {
                 return;
             }
+           
             int d = int.Parse(birthdayBox.Text);
             int y = int.Parse(birthyearBox.Text);
             pd.setBirthDay(d, birthmonthSelector.SelectedIndex, y);
@@ -34,6 +41,7 @@ namespace WindowsFormsApplication1
             {
                 return;
             }
+            saveData(pd);
             Close();
         }
         private bool isLeapYear(int y)
@@ -95,9 +103,23 @@ namespace WindowsFormsApplication1
                 return "";
             }
         }
-        private void saveData()
+        private void saveData(PatientData pd)
         {
-            
+            xlApp = new Microsoft.Office.Interop.Excel.Application();
+            xlWorkBook = xlApp.Workbooks.Open("D:\\userdata.xlsx");
+            xlWorkSheet = (Excel.Worksheet)xlWorkBook.ActiveSheet;
+            xlRange = xlWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+            int idx = xlRange.Row;
+            xlWorkSheet.Cells[idx + 1, 1] = pd.getSex();
+            xlWorkSheet.Cells[idx + 1, 2] = pd.getName();
+            xlWorkSheet.Cells[idx + 1, 3] = pd.getSurname();
+            xlWorkSheet.Cells[idx + 1, 4] = pd.getDay();
+            xlWorkSheet.Cells[idx + 1, 5] = pd.getMonthName();
+            xlWorkSheet.Cells[idx + 1, 6] = pd.getYear();
+            xlWorkBook.Save();
+            MessageBox.Show("บันทึกข้อมูลแล้ว", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            xlWorkBook.Close();
+            xlApp.Quit();
         }
         private bool checkData(PatientData pd)
         {
@@ -112,7 +134,7 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("ห้ามเว้นว่างชื่อหรือนามสกุล", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            int[] dList = new int[12] { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+            int[] dList = new int[13] { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,31 };
             if (pd.getDay() > dList[pd.getMonth()] )
             {
                 MessageBox.Show("วันเกิดที่กรอกเป็นไปไม่ได้", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
