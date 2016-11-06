@@ -73,7 +73,6 @@ namespace WindowsFormsApplication1
             {
                 copyfolder(gameSource,"D:\\test\\" + gameName);
             }
-            //using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\\gamelist.txt", true))
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\\Users\\Peerawut\\Documents\\gamelist.txt", true))
             {
                 file.WriteLine(gameName);

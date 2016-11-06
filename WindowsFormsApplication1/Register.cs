@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -106,7 +107,20 @@ namespace WindowsFormsApplication1
         private void saveData(PatientData pd)
         {
             xlApp = new Microsoft.Office.Interop.Excel.Application();
-            xlWorkBook = xlApp.Workbooks.Open("D:\\userdata.xlsx");
+            if (!File.Exists("C:\\Users\\Peerawut\\Documents\\userdata.xlsx"))
+            {
+                xlWorkBook = xlApp.Workbooks.Add("");
+                xlWorkSheet = (Excel.Worksheet)xlWorkBook.ActiveSheet;
+                xlWorkSheet.Cells[ 1, 1] ="คำนำหน้าชื่อ";
+                xlWorkSheet.Cells[1, 2] = "ชื่อ";
+                xlWorkSheet.Cells[1, 3] = "นามสกุล";
+                xlWorkSheet.Cells[1, 4] = "วันเกิด";
+                xlWorkSheet.Cells[1, 5] = "เดือนเกิด";
+                xlWorkSheet.Cells[1, 6] = "ปีเกิด (พ.ศ.)";
+                xlWorkBook.SaveAs("C:\\Users\\Peerawut\\Documents\\userdata.xlsx");
+                xlWorkBook.Close();
+            }
+            xlWorkBook = xlApp.Workbooks.Open("C:\\Users\\Peerawut\\Documents\\userdata.xlsx");          
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.ActiveSheet;
             xlRange = xlWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
             int idx = xlRange.Row;
