@@ -42,7 +42,8 @@ namespace WindowsFormsApplication1
             {
                 return;
             }
-            saveData(pd);
+            //saveData(pd);
+            saveCSV(pd);
             Close();
         }
         private bool isLeapYear(int y)
@@ -134,6 +135,22 @@ namespace WindowsFormsApplication1
             MessageBox.Show("บันทึกข้อมูลแล้ว", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
             xlWorkBook.Close();
             xlApp.Quit();
+        }
+        private void saveCSV(PatientData pd)
+        {
+            if (!File.Exists("C:\\Users\\Peerawut\\Documents\\userdata.csv"))
+            {
+                using (System.IO.StreamWriter file = new StreamWriter(@"C:\\Users\\Peerawut\\Documents\\userdata.csv",true, Encoding.UTF8))
+                {
+                    file.WriteLine("คำนำหน้าชื่อ,ชื่อ,นามสกุล,วันเกิด,เดือนเกิด,ปีเกิด (พ.ศ.)");
+                }
+            }
+            string input = pd.getSex()+","+ pd.getName() + ","+ pd.getSurname() + ","+pd.getDay() + ","+ pd.getMonthName() + ","+ pd.getYear();
+            using (System.IO.StreamWriter file = new StreamWriter(@"C:\\Users\\Peerawut\\Documents\\userdata.csv", true, Encoding.UTF8))
+            {
+                file.WriteLine(input);
+            }
+            MessageBox.Show("บันทึกข้อมูลแล้ว", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private bool checkData(PatientData pd)
         {
