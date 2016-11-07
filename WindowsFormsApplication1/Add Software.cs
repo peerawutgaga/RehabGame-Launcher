@@ -76,7 +76,7 @@ namespace WindowsFormsApplication1
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\\Users\\Peerawut\\Documents\\gamelist.txt", true))
             {
                 file.WriteLine(gameName);
-                file.WriteLine(gameLocation+"\\"+gameName+".exe");
+                file.WriteLine(gameLocation+"\\"+gameName+"\\"+gameName+".exe");
             }
             Close();
         }
