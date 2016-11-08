@@ -16,6 +16,7 @@ namespace WindowsFormsApplication1
         private string gameLocation;
         private string gameName;
         private string gameSource;
+        private Installing installingForm;
         public Add_Software()
         {
             
@@ -65,13 +66,21 @@ namespace WindowsFormsApplication1
 
         private void installButton_Click(object sender, EventArgs e)
         {
+            BackgroundWorker bg = new BackgroundWorker();
             if (customLocation.Checked)
             {
-                copyfolder(gameSource, gameLocation + "\\" + gameName);
+                bg.DoWork += new DoWorkEventHandler(installAtCustomPath);
+                bg.RunWorkerCompleted += new RunWorkerCompletedEventHandler(finishInstallaion);
+                bg.RunWorkerAsync();
+               installingForm = new Installing();
+                installingForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+                installingForm.MaximizeBox = false;
+                installingForm.ShowDialog();
+                
             }
             else if (defaultLocation.Checked)
             {
-                copyfolder(gameSource,"D:\\test\\" + gameName);
+                
             }
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\\Users\\Peerawut\\Documents\\gamelist.txt", true))
             {
@@ -79,6 +88,18 @@ namespace WindowsFormsApplication1
                 file.WriteLine(gameLocation+"\\"+gameName+"\\"+gameName+".exe");
             }
             Close();
+        }
+        private void installAtCustomPath(object sender,DoWorkEventArgs e)
+        {
+            copyfolder(gameSource, gameLocation + "\\" + gameName);
+        }
+        private void installAtDefaultPath(object sender, DoWorkEventArgs e)
+        {
+            
+        }
+        private void finishInstallaion(object sender,RunWorkerCompletedEventArgs e)
+        {
+            installingForm.Close();
         }
         private void custonLocation_checked(object sender, EventArgs e)
         {
@@ -99,7 +120,7 @@ namespace WindowsFormsApplication1
         }
         private void copyfolder(string sourceDirName, string destDirName)
         {
-            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
+           DirectoryInfo dir = new DirectoryInfo(sourceDirName);
 
             if (!dir.Exists)
             {
@@ -107,14 +128,13 @@ namespace WindowsFormsApplication1
                     "Source directory does not exist or could not be found: "
                     + sourceDirName);
             }
-
             DirectoryInfo[] dirs = dir.GetDirectories();
             // If the destination directory doesn't exist, create it.
             if (!Directory.Exists(destDirName))
             {
                 Directory.CreateDirectory(destDirName);
             }
-
+          
             // Get the files in the directory and copy them to the new location.
             FileInfo[] files = dir.GetFiles();
             foreach (FileInfo file in files)
