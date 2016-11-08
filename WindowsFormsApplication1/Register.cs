@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Excel = Microsoft.Office.Interop.Excel;
+//using Excel = Microsoft.Office.Interop.Excel;
 
 
 namespace WindowsFormsApplication1
@@ -16,10 +16,10 @@ namespace WindowsFormsApplication1
     public partial class Register : Form
     {
         private PatientData pd;
-        Excel.Application xlApp;
+        /*Excel.Application xlApp;
         Excel.Workbook xlWorkBook;
         Excel.Worksheet xlWorkSheet;
-        Excel.Range xlRange;
+        Excel.Range xlRange;*/
         public Register()
         {
             InitializeComponent();
@@ -42,7 +42,6 @@ namespace WindowsFormsApplication1
             {
                 return;
             }
-            //saveData(pd);
             saveCSV(pd);
             Close();
         }
@@ -105,7 +104,7 @@ namespace WindowsFormsApplication1
                 return "";
             }
         }
-        private void saveData(PatientData pd)
+       /* private void saveExcel(PatientData pd)
         {
             xlApp = new Microsoft.Office.Interop.Excel.Application();
             if (!File.Exists("C:\\Users\\Peerawut\\Documents\\userdata.xlsx"))
@@ -135,7 +134,7 @@ namespace WindowsFormsApplication1
             MessageBox.Show("บันทึกข้อมูลแล้ว", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
             xlWorkBook.Close();
             xlApp.Quit();
-        }
+        }*/
         private void saveCSV(PatientData pd)
         {
             if (!File.Exists("C:\\Users\\Peerawut\\Documents\\userdata.csv"))
