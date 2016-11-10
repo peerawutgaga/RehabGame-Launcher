@@ -16,6 +16,7 @@ namespace WindowsFormsApplication1
         private string gameLocation;
         private string gameName;
         private string gameSource;
+        private string originalName;
         private Installing installingForm;
         public Add_Software()
         {
@@ -25,7 +26,7 @@ namespace WindowsFormsApplication1
             this.MaximizeBox = false;
             swLocation.Hide();
             swNameLabel.Hide();
-            swNameShow.Hide();
+            swNameBox.Hide();
             currentLocation.Hide();
             currentLocationShow.Hide();
             defaultLocation.Hide();
@@ -44,13 +45,14 @@ namespace WindowsFormsApplication1
                 gameName = Path.GetFileNameWithoutExtension(op.FileName);
                 gameLocation = Path.GetDirectoryName(op.FileName);
                 gameSource = gameLocation;
-                swNameShow.Text = gameName;
+                swNameBox.Text = gameName;
+                originalName = swNameBox.Text;
                 currentLocationShow.Text = gameLocation;
                 currentLocationShow.MaximumSize = new Size(380, 0);
                 currentLocationShow.AutoSize = true;
                 swLocation.Show();
                 swNameLabel.Show();
-                swNameShow.Show();
+                swNameBox.Show();
                 currentLocation.Show();
                 currentLocationShow.Show();
                 defaultLocation.Show();
@@ -66,6 +68,11 @@ namespace WindowsFormsApplication1
 
         private void installButton_Click(object sender, EventArgs e)
         {
+            if (gameName == "")
+            {
+                MessageBox.Show("กรุณาใส่ชื่อ Software", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             BackgroundWorker bg = new BackgroundWorker();
             if (customLocation.Checked)
             {
@@ -82,6 +89,10 @@ namespace WindowsFormsApplication1
             {
                 
             }
+            string s = gameLocation + "\\"+gameName+"\\" + originalName + ".exe";
+            string d = gameLocation + "\\"+gameName+"\\" + swNameBox.Text + ".exe";
+            File.Move(s,d );
+            File.Delete(s);
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\\Users\\Peerawut\\Documents\\gamelist.txt", true))
             {
                 file.WriteLine(gameName);
@@ -148,6 +159,14 @@ namespace WindowsFormsApplication1
                  string temppath = Path.Combine(destDirName, subdir.Name);
                  copyfolder(subdir.FullName, temppath);
             }  
+        }
+
+        private void swNameBox_TextChanged(object sender, EventArgs e)
+        {
+            
+                gameName = swNameBox.Text;
+            
+            
         }
     }
 }

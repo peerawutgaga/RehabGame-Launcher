@@ -30,7 +30,6 @@
         {
             this.browseButton = new System.Windows.Forms.Button();
             this.swNameLabel = new System.Windows.Forms.Label();
-            this.swNameShow = new System.Windows.Forms.Label();
             this.swLocation = new System.Windows.Forms.Label();
             this.currentLocation = new System.Windows.Forms.RadioButton();
             this.customLocation = new System.Windows.Forms.RadioButton();
@@ -40,6 +39,7 @@
             this.installButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.currentLocationShow = new System.Windows.Forms.Label();
+            this.swNameBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // browseButton
@@ -60,15 +60,6 @@
             this.swNameLabel.Size = new System.Drawing.Size(42, 13);
             this.swNameLabel.TabIndex = 1;
             this.swNameLabel.Text = "ชื่อเกม:";
-            // 
-            // swNameShow
-            // 
-            this.swNameShow.AutoSize = true;
-            this.swNameShow.Location = new System.Drawing.Point(70, 102);
-            this.swNameShow.Name = "swNameShow";
-            this.swNameShow.Size = new System.Drawing.Size(33, 13);
-            this.swNameShow.TabIndex = 2;
-            this.swNameShow.Text = "name";
             // 
             // swLocation
             // 
@@ -161,11 +152,20 @@
             this.currentLocationShow.TabIndex = 11;
             this.currentLocationShow.Text = "ที่อยู่:";
             // 
+            // swNameBox
+            // 
+            this.swNameBox.Location = new System.Drawing.Point(84, 99);
+            this.swNameBox.Name = "swNameBox";
+            this.swNameBox.Size = new System.Drawing.Size(290, 20);
+            this.swNameBox.TabIndex = 12;
+            this.swNameBox.TextChanged += new System.EventHandler(this.swNameBox_TextChanged);
+            // 
             // Add_Software
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(463, 487);
+            this.Controls.Add(this.swNameBox);
             this.Controls.Add(this.currentLocationShow);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.installButton);
@@ -175,7 +175,6 @@
             this.Controls.Add(this.customLocation);
             this.Controls.Add(this.currentLocation);
             this.Controls.Add(this.swLocation);
-            this.Controls.Add(this.swNameShow);
             this.Controls.Add(this.swNameLabel);
             this.Controls.Add(this.browseButton);
             this.Name = "Add_Software";
@@ -189,7 +188,6 @@
 
         private System.Windows.Forms.Button browseButton;
         private System.Windows.Forms.Label swNameLabel;
-        private System.Windows.Forms.Label swNameShow;
         private System.Windows.Forms.Label swLocation;
         private System.Windows.Forms.RadioButton currentLocation;
         private System.Windows.Forms.RadioButton customLocation;
@@ -199,5 +197,6 @@
         private System.Windows.Forms.Button installButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Label currentLocationShow;
+        private System.Windows.Forms.TextBox swNameBox;
     }
 }
