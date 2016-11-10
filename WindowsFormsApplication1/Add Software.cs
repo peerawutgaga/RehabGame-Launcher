@@ -17,7 +17,7 @@ namespace WindowsFormsApplication1
         private string gameName;
         private string gameSource;
         private string originalName;
-        private Installing installingForm;
+        private Installing installingForm = new Installing();
         public Add_Software()
         {
             
@@ -35,6 +35,8 @@ namespace WindowsFormsApplication1
             customLocationButton.Hide();
             customLocationLabel.Hide();
             installButton.Enabled = false;
+            installingForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            installingForm.MaximizeBox = false;
         }
 
         private void browseButton_Click(object sender, EventArgs e)
@@ -76,14 +78,11 @@ namespace WindowsFormsApplication1
             BackgroundWorker bg = new BackgroundWorker();
             if (customLocation.Checked)
             {
+                installingForm.ShowDialog();
                 bg.DoWork += new DoWorkEventHandler(installAtCustomPath);
                 bg.RunWorkerCompleted += new RunWorkerCompletedEventHandler(finishInstallaion);
                 bg.RunWorkerAsync();
-               installingForm = new Installing();
-                installingForm.FormBorderStyle = FormBorderStyle.FixedSingle;
-                installingForm.MaximizeBox = false;
-                installingForm.ShowDialog();
-                
+
             }
             else if (defaultLocation.Checked)
             {
@@ -110,6 +109,7 @@ namespace WindowsFormsApplication1
         }
         private void finishInstallaion(object sender,RunWorkerCompletedEventArgs e)
         {
+            
             installingForm.Close();
         }
         private void custonLocation_checked(object sender, EventArgs e)
