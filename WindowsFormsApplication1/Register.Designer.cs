@@ -43,18 +43,20 @@
             this.sexLabel = new System.Windows.Forms.Label();
             this.ms = new System.Windows.Forms.RadioButton();
             this.mrs = new System.Windows.Forms.RadioButton();
+            this.IDLabel = new System.Windows.Forms.Label();
+            this.IDBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // nameBox
             // 
-            this.nameBox.Location = new System.Drawing.Point(94, 124);
+            this.nameBox.Location = new System.Drawing.Point(98, 169);
             this.nameBox.Name = "nameBox";
             this.nameBox.Size = new System.Drawing.Size(254, 20);
             this.nameBox.TabIndex = 0;
             // 
             // surnameBox
             // 
-            this.surnameBox.Location = new System.Drawing.Point(94, 162);
+            this.surnameBox.Location = new System.Drawing.Point(98, 207);
             this.surnameBox.Name = "surnameBox";
             this.surnameBox.Size = new System.Drawing.Size(254, 20);
             this.surnameBox.TabIndex = 1;
@@ -83,7 +85,7 @@
             // 
             this.banner.AutoSize = true;
             this.banner.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.banner.Location = new System.Drawing.Point(107, 23);
+            this.banner.Location = new System.Drawing.Point(88, 22);
             this.banner.Name = "banner";
             this.banner.Size = new System.Drawing.Size(222, 31);
             this.banner.TabIndex = 4;
@@ -92,7 +94,7 @@
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(16, 124);
+            this.nameLabel.Location = new System.Drawing.Point(20, 169);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(20, 13);
             this.nameLabel.TabIndex = 5;
@@ -101,7 +103,7 @@
             // surnameLabel
             // 
             this.surnameLabel.AutoSize = true;
-            this.surnameLabel.Location = new System.Drawing.Point(12, 162);
+            this.surnameLabel.Location = new System.Drawing.Point(16, 207);
             this.surnameLabel.Name = "surnameLabel";
             this.surnameLabel.Size = new System.Drawing.Size(46, 13);
             this.surnameLabel.TabIndex = 6;
@@ -110,7 +112,7 @@
             // birthdayLabel
             // 
             this.birthdayLabel.AutoSize = true;
-            this.birthdayLabel.Location = new System.Drawing.Point(12, 197);
+            this.birthdayLabel.Location = new System.Drawing.Point(16, 242);
             this.birthdayLabel.Name = "birthdayLabel";
             this.birthdayLabel.Size = new System.Drawing.Size(73, 13);
             this.birthdayLabel.TabIndex = 9;
@@ -118,7 +120,7 @@
             // 
             // birthdayBox
             // 
-            this.birthdayBox.Location = new System.Drawing.Point(94, 197);
+            this.birthdayBox.Location = new System.Drawing.Point(98, 242);
             this.birthdayBox.Multiline = true;
             this.birthdayBox.Name = "birthdayBox";
             this.birthdayBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -131,7 +133,7 @@
             // 
             // birthyearBox
             // 
-            this.birthyearBox.Location = new System.Drawing.Point(281, 198);
+            this.birthyearBox.Location = new System.Drawing.Point(285, 243);
             this.birthyearBox.Name = "birthyearBox";
             this.birthyearBox.Size = new System.Drawing.Size(67, 20);
             this.birthyearBox.TabIndex = 12;
@@ -156,7 +158,7 @@
             "ตุลาคม",
             "พฤษจิการยน",
             "ธันวาคม"});
-            this.birthmonthSelector.Location = new System.Drawing.Point(155, 197);
+            this.birthmonthSelector.Location = new System.Drawing.Point(159, 242);
             this.birthmonthSelector.Name = "birthmonthSelector";
             this.birthmonthSelector.Size = new System.Drawing.Size(119, 21);
             this.birthmonthSelector.TabIndex = 14;
@@ -165,7 +167,7 @@
             // mr
             // 
             this.mr.AutoSize = true;
-            this.mr.Location = new System.Drawing.Point(94, 90);
+            this.mr.Location = new System.Drawing.Point(98, 132);
             this.mr.Name = "mr";
             this.mr.Size = new System.Drawing.Size(45, 17);
             this.mr.TabIndex = 15;
@@ -176,7 +178,7 @@
             // sexLabel
             // 
             this.sexLabel.AutoSize = true;
-            this.sexLabel.Location = new System.Drawing.Point(16, 90);
+            this.sexLabel.Location = new System.Drawing.Point(20, 132);
             this.sexLabel.Name = "sexLabel";
             this.sexLabel.Size = new System.Drawing.Size(28, 13);
             this.sexLabel.TabIndex = 16;
@@ -185,7 +187,7 @@
             // ms
             // 
             this.ms.AutoSize = true;
-            this.ms.Location = new System.Drawing.Point(214, 90);
+            this.ms.Location = new System.Drawing.Point(218, 132);
             this.ms.Name = "ms";
             this.ms.Size = new System.Drawing.Size(60, 17);
             this.ms.TabIndex = 17;
@@ -196,7 +198,7 @@
             // mrs
             // 
             this.mrs.AutoSize = true;
-            this.mrs.Location = new System.Drawing.Point(155, 90);
+            this.mrs.Location = new System.Drawing.Point(159, 132);
             this.mrs.Name = "mrs";
             this.mrs.Size = new System.Drawing.Size(43, 17);
             this.mrs.TabIndex = 18;
@@ -204,11 +206,29 @@
             this.mrs.Text = "นาง";
             this.mrs.UseVisualStyleBackColor = true;
             // 
+            // IDLabel
+            // 
+            this.IDLabel.AutoSize = true;
+            this.IDLabel.Location = new System.Drawing.Point(20, 100);
+            this.IDLabel.Name = "IDLabel";
+            this.IDLabel.Size = new System.Drawing.Size(53, 13);
+            this.IDLabel.TabIndex = 19;
+            this.IDLabel.Text = "รหัสผู้ป่วย";
+            // 
+            // IDBox
+            // 
+            this.IDBox.Location = new System.Drawing.Point(98, 100);
+            this.IDBox.Name = "IDBox";
+            this.IDBox.Size = new System.Drawing.Size(254, 20);
+            this.IDBox.TabIndex = 20;
+            // 
             // Register
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(391, 529);
+            this.Controls.Add(this.IDBox);
+            this.Controls.Add(this.IDLabel);
             this.Controls.Add(this.mrs);
             this.Controls.Add(this.ms);
             this.Controls.Add(this.sexLabel);
@@ -248,5 +268,7 @@
         private System.Windows.Forms.Label sexLabel;
         private System.Windows.Forms.RadioButton ms;
         private System.Windows.Forms.RadioButton mrs;
+        private System.Windows.Forms.Label IDLabel;
+        private System.Windows.Forms.TextBox IDBox;
     }
 }

@@ -30,6 +30,7 @@ namespace WindowsFormsApplication1
         private void AddButton_Click(object sender, EventArgs e)
         {
             pd = new PatientData(sexDefine(),nameBox.Text,surnameBox.Text);
+            pd.setID(IDBox.Text);
             if (!checkBirthdayFormat())
             {
                 return;
@@ -141,10 +142,10 @@ namespace WindowsFormsApplication1
             {
                 using (System.IO.StreamWriter file = new StreamWriter(@"C:\\Users\\Peerawut\\Documents\\userdata.csv",true, Encoding.UTF8))
                 {
-                    file.WriteLine("คำนำหน้าชื่อ,ชื่อ,นามสกุล,วันเกิด,เดือนเกิด,ปีเกิด (พ.ศ.)");
+                    file.WriteLine("รหัส,คำนำหน้าชื่อ,ชื่อ,นามสกุล,วันเกิด,เดือนเกิด,ปีเกิด (พ.ศ.)");
                 }
             }
-            string input = pd.getSex()+","+ pd.getName() + ","+ pd.getSurname() + ","+pd.getDay() + ","+ pd.getMonthName() + ","+ pd.getYear();
+            string input = pd.getID()+","+pd.getSex()+","+ pd.getName() + ","+ pd.getSurname() + ","+pd.getDay() + ","+ pd.getMonthName() + ","+ pd.getYear();
             using (System.IO.StreamWriter file = new StreamWriter(@"C:\\Users\\Peerawut\\Documents\\userdata.csv", true, Encoding.UTF8))
             {
                 file.WriteLine(input);
@@ -153,8 +154,12 @@ namespace WindowsFormsApplication1
         }
         private bool checkData(PatientData pd)
         {
-            string sex = pd.getSex() ;
-            if (sex == "")
+            if(pd.getID() == "")
+            {
+                MessageBox.Show("กรุณาใส่รหัสผู้ป่วย", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (pd.getSex() == "")
             {
                 MessageBox.Show("กรุณาระบุคำนำหน้าชื่อ", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;

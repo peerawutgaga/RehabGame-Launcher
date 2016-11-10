@@ -4,7 +4,7 @@ namespace WindowsFormsApplication1
 {
     internal class PatientData
     {
-        private string name,surname,birthmonthText,sex;
+        private string name,surname,birthmonthText,sex,id;
         private int birthday, birthmonthNum, birthyear;
         public PatientData(string sex,string name,string surname)
         {
@@ -48,7 +48,13 @@ namespace WindowsFormsApplication1
         {
             return sex;
         }
-        
-
+        public string getID()
+        {
+            return id;
+        }
+        public void setID(string id)
+        {
+            this.id = id;
+        }
     }
 }
