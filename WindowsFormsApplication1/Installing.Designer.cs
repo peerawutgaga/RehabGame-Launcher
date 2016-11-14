@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.processMessage = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // processMessage
@@ -40,11 +41,19 @@
             this.processMessage.TabIndex = 0;
             this.processMessage.Text = "Copying software files to destination...";
             // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(29, 65);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(409, 23);
+            this.progressBar.TabIndex = 1;
+            // 
             // Installing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(465, 112);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.processMessage);
             this.Name = "Installing";
             this.Text = "Installing";
@@ -56,5 +65,6 @@
         #endregion
 
         private System.Windows.Forms.Label processMessage;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }

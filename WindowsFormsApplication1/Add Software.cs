@@ -75,23 +75,24 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("กรุณาใส่ชื่อ Software", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            BackgroundWorker bg = new BackgroundWorker();
             if (customLocation.Checked)
             {
-                installingForm.ShowDialog();
-                bg.DoWork += new DoWorkEventHandler(installAtCustomPath);
-                bg.RunWorkerCompleted += new RunWorkerCompletedEventHandler(finishInstallaion);
-                bg.RunWorkerAsync();
-
+                installingForm.setValue(gameSource, gameLocation, gameName, 2);
+                installingForm.startInstall();
             }
             else if (defaultLocation.Checked)
             {
-                
+                installingForm.setValue(gameSource, gameLocation, gameName, 1);
             }
-            string s = gameLocation + "\\"+gameName+"\\" + originalName + ".exe";
-            string d = gameLocation + "\\"+gameName+"\\" + swNameBox.Text + ".exe";
-            File.Move(s,d );
-            File.Delete(s);
+           
+            if (originalName != gameName)
+            {
+                string s = gameLocation + "\\" + gameName + "\\" + originalName + ".exe";
+                string d = gameLocation + "\\" + gameName + "\\" + gameName + ".exe";
+                File.Move(s, d);
+                File.Delete(s);
+            }
+            
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\\Users\\Peerawut\\Documents\\gamelist.txt", true))
             {
                 file.WriteLine(gameName);
@@ -99,19 +100,7 @@ namespace WindowsFormsApplication1
             }
             Close();
         }
-        private void installAtCustomPath(object sender,DoWorkEventArgs e)
-        {
-            copyfolder(gameSource, gameLocation + "\\" + gameName);
-        }
-        private void installAtDefaultPath(object sender, DoWorkEventArgs e)
-        {
-            
-        }
-        private void finishInstallaion(object sender,RunWorkerCompletedEventArgs e)
-        {
-            
-            installingForm.Close();
-        }
+        
         private void custonLocation_checked(object sender, EventArgs e)
         {
             customLocationButton.Show();
@@ -129,37 +118,7 @@ namespace WindowsFormsApplication1
                 installButton.Enabled = true;
             }
         }
-        private void copyfolder(string sourceDirName, string destDirName)
-        {
-           DirectoryInfo dir = new DirectoryInfo(sourceDirName);
-
-            if (!dir.Exists)
-            {
-                throw new DirectoryNotFoundException(
-                    "Source directory does not exist or could not be found: "
-                    + sourceDirName);
-            }
-            DirectoryInfo[] dirs = dir.GetDirectories();
-            // If the destination directory doesn't exist, create it.
-            if (!Directory.Exists(destDirName))
-            {
-                Directory.CreateDirectory(destDirName);
-            }
-          
-            // Get the files in the directory and copy them to the new location.
-            FileInfo[] files = dir.GetFiles();
-            foreach (FileInfo file in files)
-            {
-                string temppath = Path.Combine(destDirName, file.Name);
-                file.CopyTo(temppath, false);
-            }
-             //copy sub folder
-            foreach (DirectoryInfo subdir in dirs)
-            {
-                 string temppath = Path.Combine(destDirName, subdir.Name);
-                 copyfolder(subdir.FullName, temppath);
-            }  
-        }
+        
 
         private void swNameBox_TextChanged(object sender, EventArgs e)
         {
