@@ -89,8 +89,12 @@ namespace WindowsFormsApplication1
             {
                 string s = gameLocation + "\\" + gameName + "\\" + originalName + ".exe";
                 string d = gameLocation + "\\" + gameName + "\\" + gameName + ".exe";
-                File.Move(s, d);
-                File.Delete(s);
+                if (File.Exists(s))
+                {
+                    File.Move(s, d);
+                    File.Delete(s);
+                }
+                
             }
             
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\\Users\\Peerawut\\Documents\\gamelist.txt", true))

@@ -14,7 +14,7 @@ namespace WindowsFormsApplication1
     public partial class Installing : Form
     {
         private string gameSource, gameLocation, gameName;
-        private int mode,c;
+        private int mode;
         private BackgroundWorker bg = new BackgroundWorker();
         public Installing()
         {
@@ -29,8 +29,7 @@ namespace WindowsFormsApplication1
         }
         public void startInstall()
         {
-            c = fileCount(gameSource);
-            switch (mode)
+           switch (mode)
             {
                 case 2: bg.DoWork += new DoWorkEventHandler(installAtCustomPath);
                     break;
@@ -38,15 +37,11 @@ namespace WindowsFormsApplication1
                     bg.DoWork += new DoWorkEventHandler(installAtDefaultPath);
                     break;
             }
-            bg.ProgressChanged += new ProgressChangedEventHandler(progressBarRun);
             bg.RunWorkerCompleted += new RunWorkerCompletedEventHandler(finishInstallaion);
             bg.RunWorkerAsync();
             this.Show();
         }
-        private void progressBarRun(object sender, ProgressChangedEventArgs e)
-        {
-            progressBar.Value = e.ProgressPercentage;
-        }
+        
         private void installAtCustomPath(object sender, DoWorkEventArgs e)
         {
 
@@ -64,7 +59,6 @@ namespace WindowsFormsApplication1
         private void copyfolder(string sourceDirName, string destDirName)
         {
             DirectoryInfo dir = new DirectoryInfo(sourceDirName);
-            int fCount = 0;
             if (!dir.Exists)
             {
                 throw new DirectoryNotFoundException(
@@ -76,6 +70,7 @@ namespace WindowsFormsApplication1
             if (!Directory.Exists(destDirName))
             {
                 Directory.CreateDirectory(destDirName);
+               
             }
 
             // Get the files in the directory and copy them to the new location.
@@ -90,27 +85,9 @@ namespace WindowsFormsApplication1
             {
                 string temppath = Path.Combine(destDirName, subdir.Name);
                 copyfolder(subdir.FullName, temppath);
+
             }
         }
-        private int fileCount(string sourceDirName)
-        {
-            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
-
-            DirectoryInfo[] dirs = dir.GetDirectories();
-            int fCount = 0;
-            // Get the files in the directory and copy them to the new location.
-            FileInfo[] files = dir.GetFiles();
-            foreach (FileInfo file in files)
-            {
-                fCount++;
-            }
-            //copy sub folder
-            foreach (DirectoryInfo subdir in dirs)
-            {
-
-                fCount += fileCount(subdir.FullName);
-            }
-            return fCount;
-        }
+       
     }
 }
