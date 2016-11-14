@@ -14,7 +14,8 @@ namespace WindowsFormsApplication1
     public partial class Installing : Form
     {
         private string gameSource, gameLocation, gameName;
-        private int mode;
+        private int mode,c;
+        private BackgroundWorker bg = new BackgroundWorker();
         public Installing()
         {
             InitializeComponent();
@@ -28,8 +29,7 @@ namespace WindowsFormsApplication1
         }
         public void startInstall()
         {
-            BackgroundWorker bg = new BackgroundWorker();
-            
+            c = fileCount(gameSource);
             switch (mode)
             {
                 case 2: bg.DoWork += new DoWorkEventHandler(installAtCustomPath);
@@ -38,9 +38,14 @@ namespace WindowsFormsApplication1
                     bg.DoWork += new DoWorkEventHandler(installAtDefaultPath);
                     break;
             }
+            bg.ProgressChanged += new ProgressChangedEventHandler(progressBarRun);
             bg.RunWorkerCompleted += new RunWorkerCompletedEventHandler(finishInstallaion);
             bg.RunWorkerAsync();
             this.Show();
+        }
+        private void progressBarRun(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar.Value = e.ProgressPercentage;
         }
         private void installAtCustomPath(object sender, DoWorkEventArgs e)
         {
@@ -59,7 +64,7 @@ namespace WindowsFormsApplication1
         private void copyfolder(string sourceDirName, string destDirName)
         {
             DirectoryInfo dir = new DirectoryInfo(sourceDirName);
-
+            int fCount = 0;
             if (!dir.Exists)
             {
                 throw new DirectoryNotFoundException(
