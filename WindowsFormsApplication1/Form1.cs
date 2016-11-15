@@ -17,12 +17,15 @@ namespace WindowsFormsApplication1
     {
         private List<GameButton> bs = new List<GameButton>();
         private Button addGame = new Button();
+        DataGrid dg = new DataGrid();
+        DataTable tb = new DataTable();
         public MainWindow()
         {
             InitializeComponent();
             addGame.Text = "Add new game";
             addGame.Click += new EventHandler(addGame_click);
             loadButton();
+            initialDataGrid();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
         }
@@ -43,7 +46,7 @@ namespace WindowsFormsApplication1
         }
         private void registerForm_closeing(object sender, FormClosingEventArgs e)
         {
-           
+            updateDataGrid();
         }
         private void addSoftwareForm_closeing(object sender, FormClosingEventArgs e)
         {
@@ -103,6 +106,42 @@ namespace WindowsFormsApplication1
             Add_Software a = new Add_Software();
             a.FormClosing += new FormClosingEventHandler(this.addSoftwareForm_closeing);
             a.Show();
+        }
+        private void initialDataGrid()
+        {
+            if (!File.Exists("C:\\Users\\Peerawut\\Documents\\userdata.csv"))
+            {
+                using (System.IO.StreamWriter file = new StreamWriter(@"C:\\Users\\Peerawut\\Documents\\userdata.csv", true, Encoding.UTF8))
+                {
+                    file.WriteLine("รหัส,คำนำหน้าชื่อ,ชื่อ,นามสกุล,วันเกิด,เดือนเกิด,ปีเกิด (พ.ศ.)");
+                }
+            }
+           
+            string[] rawText = File.ReadAllLines("C:\\Users\\Peerawut\\Documents\\userdata.csv");
+            string[] col = null;
+            dg.Size = new Size(370, 370);
+            dg.Location = new Point(10, 30);
+            dg.ReadOnly = true;
+            col = rawText[0].Split(',');
+            for(int i = 0; i < col.Length; i++)
+            {
+                tb.Columns.Add(col[i]);
+            }
+            for (int i = 1;i<rawText.Length;i++)
+            {
+                col = rawText[i].Split(',');
+                    tb.Rows.Add(col);
+                
+            }
+            dg.DataSource = tb;
+            this.Controls.Add(dg);
+        }
+        private void updateDataGrid()
+        {
+            string[] rawText = File.ReadAllLines("C:\\Users\\Peerawut\\Documents\\userdata.csv");
+            string[] col = null;
+            col = rawText.Last<string>().Split(',');
+            tb.Rows.Add(col);
         }
     }
 }
