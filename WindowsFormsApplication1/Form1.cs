@@ -119,9 +119,10 @@ namespace WindowsFormsApplication1
            
             string[] rawText = File.ReadAllLines("C:\\Users\\Peerawut\\Documents\\userdata.csv");
             string[] col = null;
-            dg.Size = new Size(370, 370);
-            dg.Location = new Point(10, 30);
+            dg.Size = new Size(360, 380);
+            dg.Location = new Point(20, 30);
             dg.ReadOnly = true;
+            
             col = rawText[0].Split(',');
             for(int i = 0; i < col.Length; i++)
             {
