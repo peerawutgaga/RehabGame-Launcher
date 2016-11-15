@@ -60,11 +60,11 @@ namespace WindowsFormsApplication1
             int y = this.Height / 6;
             int s = 80;
             int idx = 0;
-            if (!File.Exists("C:\\Users\\Peerawut\\Documents\\gamelist.txt"))
+            if (!File.Exists(Directory.GetCurrentDirectory()+"\\gamelist.txt"))
             {
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\\Users\\Peerawut\\Documents\\gamelist.txt", true)) ;         
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(Directory.GetCurrentDirectory() + "\\gamelist.txt", true)) ;         
             }
-            string[] lines = File.ReadAllLines(@"C:\\Users\\Peerawut\\Documents\\gamelist.txt");
+            string[] lines = File.ReadAllLines(Directory.GetCurrentDirectory() + "\\gamelist.txt");
             for (int i = 0; i < lines.Length; i += 2)
             {
                 GameButton b = new GameButton(lines[i]);
@@ -109,15 +109,15 @@ namespace WindowsFormsApplication1
         }
         private void initialDataGrid()
         {
-            if (!File.Exists("C:\\Users\\Peerawut\\Documents\\userdata.csv"))
+            if (!File.Exists(Directory.GetCurrentDirectory()+"\\userdata.csv"))
             {
-                using (System.IO.StreamWriter file = new StreamWriter(@"C:\\Users\\Peerawut\\Documents\\userdata.csv", true, Encoding.UTF8))
+                using (System.IO.StreamWriter file = new StreamWriter(Directory.GetCurrentDirectory() +"\\userdata.csv", true, Encoding.UTF8))
                 {
                     file.WriteLine("รหัส,คำนำหน้าชื่อ,ชื่อ,นามสกุล,วันเกิด,เดือนเกิด,ปีเกิด (พ.ศ.)");
                 }
             }
            
-            string[] rawText = File.ReadAllLines("C:\\Users\\Peerawut\\Documents\\userdata.csv");
+            string[] rawText = File.ReadAllLines(Directory.GetCurrentDirectory() + "\\userdata.csv");
             string[] col = null;
             dg.Size = new Size(360, 380);
             dg.Location = new Point(20, 30);
@@ -139,7 +139,7 @@ namespace WindowsFormsApplication1
         }
         private void updateDataGrid()
         {
-            string[] rawText = File.ReadAllLines("C:\\Users\\Peerawut\\Documents\\userdata.csv");
+            string[] rawText = File.ReadAllLines(Directory.GetCurrentDirectory() + "\\userdata.csv");
             string[] col = null;
             col = rawText.Last<string>().Split(',');
             tb.Rows.Add(col);

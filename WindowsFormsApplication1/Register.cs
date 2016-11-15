@@ -138,7 +138,7 @@ namespace WindowsFormsApplication1
         }*/
         private void saveCSV(PatientData pd)
         {
-            if (!File.Exists("C:\\Users\\Peerawut\\Documents\\userdata.csv"))
+            if (!File.Exists(Directory.GetCurrentDirectory() + "\\userdata.csv"))
             {
                 using (System.IO.StreamWriter file = new StreamWriter(@"C:\\Users\\Peerawut\\Documents\\userdata.csv",true, Encoding.UTF8))
                 {
@@ -146,7 +146,7 @@ namespace WindowsFormsApplication1
                 }
             }
             string input = pd.getID()+","+pd.getSex()+","+ pd.getName() + ","+ pd.getSurname() + ","+pd.getDay() + ","+ pd.getMonthName() + ","+ pd.getYear();
-            using (System.IO.StreamWriter file = new StreamWriter(@"C:\\Users\\Peerawut\\Documents\\userdata.csv", true, Encoding.UTF8))
+            using (StreamWriter file = new StreamWriter(Directory.GetCurrentDirectory() + "\\userdata.csv", true, Encoding.UTF8))
             {
                 file.WriteLine(input);
             }
