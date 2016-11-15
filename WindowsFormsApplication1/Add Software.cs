@@ -77,12 +77,14 @@ namespace WindowsFormsApplication1
             }
             if (customLocation.Checked)
             {
-                installingForm.setValue(gameSource, gameLocation, gameName, 2);
+                installingForm.setValue(gameSource, gameLocation, gameName);
                 installingForm.startInstall();
             }
             else if (defaultLocation.Checked)
             {
-                installingForm.setValue(gameSource, gameLocation, gameName, 1);
+                gameLocation = Directory.GetCurrentDirectory() + "\\Apps";
+                installingForm.setValue(gameSource, gameLocation, gameName);
+                installingForm.startInstall();
             }
            
             if (originalName != gameName)
@@ -130,6 +132,18 @@ namespace WindowsFormsApplication1
                 gameName = swNameBox.Text;
             
             
+        }
+
+        private void currentLocation_CheckedChanged(object sender, EventArgs e)
+        {
+            installButton.Enabled = true;
+            customLocationButton.Hide();
+        }
+
+        private void defaultLocation_CheckedChanged(object sender, EventArgs e)
+        {
+            installButton.Enabled = true;
+            customLocationButton.Hide();
         }
     }
 }

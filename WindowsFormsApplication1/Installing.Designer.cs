@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.processMessage = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // processMessage
@@ -41,21 +41,19 @@
             this.processMessage.TabIndex = 0;
             this.processMessage.Text = "Copying software files to destination...";
             // 
-            // label1
+            // progressBar1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 75);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(174, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Please wait until this box disappear.";
+            this.progressBar1.Location = new System.Drawing.Point(29, 67);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(404, 23);
+            this.progressBar1.TabIndex = 1;
             // 
             // Installing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(465, 112);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.processMessage);
             this.Name = "Installing";
             this.Text = "Installing";
@@ -67,6 +65,6 @@
         #endregion
 
         private System.Windows.Forms.Label processMessage;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }

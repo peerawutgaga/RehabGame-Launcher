@@ -80,6 +80,7 @@
             this.currentLocation.TabStop = true;
             this.currentLocation.Text = "ใช้ตำแหน่งปัจจุบัน";
             this.currentLocation.UseVisualStyleBackColor = true;
+            this.currentLocation.CheckedChanged += new System.EventHandler(this.currentLocation_CheckedChanged);
             // 
             // customLocation
             // 
@@ -103,6 +104,7 @@
             this.defaultLocation.TabStop = true;
             this.defaultLocation.Text = "คลังเกม (default)";
             this.defaultLocation.UseVisualStyleBackColor = true;
+            this.defaultLocation.CheckedChanged += new System.EventHandler(this.defaultLocation_CheckedChanged);
             // 
             // customLocationButton
             // 

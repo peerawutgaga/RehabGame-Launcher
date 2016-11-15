@@ -14,48 +14,30 @@ namespace WindowsFormsApplication1
     public partial class Installing : Form
     {
         private string gameSource, gameLocation, gameName;
-        private int mode;
+        private int fileCount,r;
         private BackgroundWorker bg = new BackgroundWorker();
         public Installing()
         {
             InitializeComponent();
         }
-        public void setValue(string s, string l, string n, int m)
+        public void setValue(string s, string l, string n)
         {
             gameSource = s;
             gameLocation = l;
             gameName = n;
-            mode = m;
         }
         public void startInstall()
         {
-           switch (mode)
-            {
-                case 2: bg.DoWork += new DoWorkEventHandler(installAtCustomPath);
-                    break;
-                case 1:
-                    bg.DoWork += new DoWorkEventHandler(installAtDefaultPath);
-                    break;
-            }
-            bg.RunWorkerCompleted += new RunWorkerCompletedEventHandler(finishInstallaion);
-            bg.RunWorkerAsync();
             this.Show();
+            r = 0;
+            fileCount = Directory.GetFiles(gameSource, "*.*", SearchOption.AllDirectories).Length;
+            progressBar1.Minimum = 0;
+            progressBar1.Maximum = fileCount;
+            copyfolder(gameSource, gameLocation + "\\" + gameName);
+            this.Close();
+         
         }
         
-        private void installAtCustomPath(object sender, DoWorkEventArgs e)
-        {
-
-            copyfolder(gameSource, gameLocation + "\\" + gameName);
-        }
-        private void installAtDefaultPath(object sender, DoWorkEventArgs e)
-        {
-
-        }
-        private void finishInstallaion(object sender, RunWorkerCompletedEventArgs e)
-        {
-            this.Close();
-            
-        }
         private void copyfolder(string sourceDirName, string destDirName)
         {
             DirectoryInfo dir = new DirectoryInfo(sourceDirName);
@@ -79,6 +61,8 @@ namespace WindowsFormsApplication1
             {
                 string temppath = Path.Combine(destDirName, file.Name);
                 file.CopyTo(temppath, false);
+                r++;
+                progressBar1.Value = r;
             }
             //copy sub folder
             foreach (DirectoryInfo subdir in dirs)
