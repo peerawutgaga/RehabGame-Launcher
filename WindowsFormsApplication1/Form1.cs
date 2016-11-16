@@ -17,8 +17,9 @@ namespace WindowsFormsApplication1
     {
         private List<GameButton> bs = new List<GameButton>();
         private Button addGame = new Button();
-        DataGrid dg = new DataGrid();
-        DataTable tb = new DataTable();
+        private DataGrid dg = new DataGrid();
+        private DataTable tb = new DataTable();
+        private bool isCancel = true;
         public MainWindow()
         {
             InitializeComponent();
@@ -46,6 +47,7 @@ namespace WindowsFormsApplication1
         }
         private void registerForm_closeing(object sender, FormClosingEventArgs e)
         {
+            tb.Clear();
             updateDataGrid();
         }
         private void addSoftwareForm_closeing(object sender, FormClosingEventArgs e)
@@ -139,10 +141,23 @@ namespace WindowsFormsApplication1
         }
         private void updateDataGrid()
         {
+            if (!File.Exists(Directory.GetCurrentDirectory() + "\\userdata.csv"))
+            {
+                using (System.IO.StreamWriter file = new StreamWriter(Directory.GetCurrentDirectory() + "\\userdata.csv", true, Encoding.UTF8))
+                {
+                    file.WriteLine("รหัส,คำนำหน้าชื่อ,ชื่อ,นามสกุล,วันเกิด,เดือนเกิด,ปีเกิด (พ.ศ.)");
+                }
+            }
             string[] rawText = File.ReadAllLines(Directory.GetCurrentDirectory() + "\\userdata.csv");
             string[] col = null;
-            col = rawText.Last<string>().Split(',');
-            tb.Rows.Add(col);
+            col = rawText[0].Split(',');
+            for (int i = 1; i < rawText.Length; i++)
+            {
+                col = rawText[i].Split(',');
+                tb.Rows.Add(col);
+
+            }
         }
+
     }
 }
