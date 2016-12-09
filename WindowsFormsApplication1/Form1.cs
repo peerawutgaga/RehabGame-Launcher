@@ -19,7 +19,6 @@ namespace WindowsFormsApplication1
         private Button addGame = new Button();
         private DataGrid dg = new DataGrid();
         private DataTable tb = new DataTable();
-        private bool isCancel = true;
         public MainWindow()
         {
             InitializeComponent();
@@ -29,8 +28,7 @@ namespace WindowsFormsApplication1
             initialDataGrid();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            // readUserList();
-            readUserData("D:\\SaveData-20453.sav");
+            importUserData("D:\\SaveData-20453.sav");
         }
         private void runButton(object sender, EventArgs e)
         {
@@ -160,7 +158,7 @@ namespace WindowsFormsApplication1
 
             }
         }
-        private void readUserList()
+        private void importUserList()
         {
             byte[] fileBytes = File.ReadAllBytes("D:\\UserListSave.sav");
             string[] t = new string[fileBytes.Length];
@@ -171,32 +169,68 @@ namespace WindowsFormsApplication1
             }
             File.WriteAllLines("D:\\UserListText.txt",t);
         }
-        private void readUserData(string filename)
+        private void importUserData(string filename)
         {
             byte[] fileBytes = File.ReadAllBytes(filename);
             int idx = 210;
-            string t = "";
-            string w = "";
+            string id = "";
+            string name = "";
+            string surname = "";
+            string temp = "";
             //read ID
-            while(true)
+            while (true)
             {
-                string temp = Convert.ToString(fileBytes[idx], 16);
+                string t = Convert.ToString(fileBytes[idx], 16).PadLeft(2, '0');
                 idx++;
-                if(temp=="28")
+                if(t=="28")
                 {
                     break;
                 }
-                t += temp+"-";
+                id += t+"-";
             }
-            t = t.Remove(t.Length - 3);
-            t = decrypeHex(t);
-            w += t;
+            id = id.Remove(id.Length - 3);
+            id = decryptHex(id);      
             //read Name
-            t = "";
             idx += 69;
+            temp = Convert.ToString(fileBytes[idx], 16);
+            idx += 2;
+            if (temp == "ff")
+            {
+                while (true)
+                {
+                    string t = Convert.ToString(fileBytes[idx], 16).PadLeft(2, '0');
+                    string t2 = Convert.ToString(fileBytes[idx+1], 16).PadLeft(2, '0');
+                    idx += 2;
+                    if (t == "2b")
+                    {
+                        break;
+                    }
+                   name += t2 + "-";
+                    name += t + "-";
+                }
+                name = name.Remove(name.Length - 7);
+                name = decryptUnicode(name);
+            }
+           else
+            {
+                while (true)
+                {
+                    string t = Convert.ToString(fileBytes[idx], 16).PadLeft(2, '0');
+                    idx++;
+                    if (t == "2b")
+                    {
+                        break;
+                    }
+                    name += t + "-";
+                }
+                name = name.Remove(name.Length - 3);
+                name = decryptHex(name);
+            }
+            //read Surname
 
+            File.WriteAllText("D:\\testoutput.txt", name);
         }
-       private string decrypeHex(string hex)
+       private string decryptHex(string hex)
         {
             hex = hex.Replace("-", "");
             byte[] raw = new byte[hex.Length / 2];
@@ -205,6 +239,17 @@ namespace WindowsFormsApplication1
                 raw[i] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
             }
             string s = Encoding.ASCII.GetString(raw);
+            return s;
+        }
+        private string decryptUnicode(string hex)
+        {
+            hex = hex.Replace("-", "");
+            byte[] raw = new byte[hex.Length/2];
+            for (int i = 0; i < raw.Length; i++)
+            {
+                raw[i] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
+            }
+            string s = Encoding.BigEndianUnicode.GetString(raw);
             return s;
         }
     }
