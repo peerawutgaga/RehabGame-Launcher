@@ -29,6 +29,8 @@ namespace WindowsFormsApplication1
             initialDataGrid();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            // readUserList();
+            readUserData("D:\\SaveData-20453.sav");
         }
         private void runButton(object sender, EventArgs e)
         {
@@ -158,6 +160,52 @@ namespace WindowsFormsApplication1
 
             }
         }
+        private void readUserList()
+        {
+            byte[] fileBytes = File.ReadAllBytes("D:\\UserListSave.sav");
+            string[] t = new string[fileBytes.Length];
 
+            for(int i=0;i<fileBytes.Length;i++)
+            {
+                t[i] = (i + 1) + " : " + Convert.ToString(fileBytes[i], 16).PadLeft(2, '0');
+            }
+            File.WriteAllLines("D:\\UserListText.txt",t);
+        }
+        private void readUserData(string filename)
+        {
+            byte[] fileBytes = File.ReadAllBytes(filename);
+            int idx = 210;
+            string t = "";
+            string w = "";
+            //read ID
+            while(true)
+            {
+                string temp = Convert.ToString(fileBytes[idx], 16);
+                idx++;
+                if(temp=="28")
+                {
+                    break;
+                }
+                t += temp+"-";
+            }
+            t = t.Remove(t.Length - 3);
+            t = decrypeHex(t);
+            w += t;
+            //read Name
+            t = "";
+            idx += 69;
+
+        }
+       private string decrypeHex(string hex)
+        {
+            hex = hex.Replace("-", "");
+            byte[] raw = new byte[hex.Length / 2];
+            for (int i = 0; i < raw.Length; i++)
+            {
+                raw[i] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
+            }
+            string s = Encoding.ASCII.GetString(raw);
+            return s;
+        }
     }
 }
