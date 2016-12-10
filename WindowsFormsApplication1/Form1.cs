@@ -28,7 +28,7 @@ namespace WindowsFormsApplication1
             initialDataGrid();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            importUserData("D:\\SaveData-20453.sav");
+            importUserData("D:\\SaveData-20455.sav");
         }
         private void runButton(object sender, EventArgs e)
         {
@@ -227,8 +227,43 @@ namespace WindowsFormsApplication1
                 name = decryptHex(name);
             }
             //read Surname
+            idx += 71;
+            temp = Convert.ToString(fileBytes[idx], 16);
+            idx += 2;
+           if (temp == "ff")
+            {
+                while (true)
+                {
+                    string t = Convert.ToString(fileBytes[idx], 16).PadLeft(2, '0');
+                    string t2 = Convert.ToString(fileBytes[idx + 1], 16).PadLeft(2, '0');
+                    idx += 2;
+                    if (t == "2f")
+                    {
+                        break;
+                    }
+                    surname += t2 + "-";
+                    surname += t + "-";
+                }
+                surname = surname.Remove(surname.Length - 7);
+                surname = decryptUnicode(surname);
+            }
+            else
+            {
+                while (true)
+                {
+                    string t = Convert.ToString(fileBytes[idx], 16).PadLeft(2, '0');
+                    idx++;
+                    if (t == "2f")
+                    {
+                        break;
+                    }
+                    surname += t + "-";
+                }
+               surname = surname.Remove(surname.Length - 3);
+               surname = decryptHex(surname);
+            }
+            File.WriteAllText("D:\\testoutput.txt", surname);
 
-            File.WriteAllText("D:\\testoutput.txt", name);
         }
        private string decryptHex(string hex)
         {
