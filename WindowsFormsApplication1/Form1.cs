@@ -262,7 +262,7 @@ namespace WindowsFormsApplication1
                surname = surname.Remove(surname.Length - 3);
                surname = decryptHex(surname);
             }
-            File.WriteAllText("D:\\testoutput.txt", surname);
+            File.WriteAllText("D:\\testoutput.csv", id+","+name+","+surname);
 
         }
        private string decryptHex(string hex)
