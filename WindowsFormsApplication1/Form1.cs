@@ -28,7 +28,8 @@ namespace WindowsFormsApplication1
             initialDataGrid();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            importUserData("D:\\SaveData-20455.sav");
+            //importUserData("D:\\SaveData-20455.sav");
+            //importUserList("C:\\Users\\Peerawut\\Desktop\\Game 1\\RehabGame1Package\\Saved\\SaveGames\\UserListSave.sav");
         }
         private void runButton(object sender, EventArgs e)
         {
@@ -158,19 +159,41 @@ namespace WindowsFormsApplication1
 
             }
         }
-        private void importUserList()
+        private void importUserList(string filename)
         {
-            byte[] fileBytes = File.ReadAllBytes("D:\\UserListSave.sav");
-            string[] t = new string[fileBytes.Length];
-
-            for(int i=0;i<fileBytes.Length;i++)
+            if (!File.Exists(filename))
             {
-                t[i] = (i + 1) + " : " + Convert.ToString(fileBytes[i], 16).PadLeft(2, '0');
+                MessageBox.Show("ไม่พบไฟล์ที่ต้องการ", "No File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            File.WriteAllLines("D:\\UserListText.txt",t);
+            byte[] fileBytes = File.ReadAllBytes(filename);
+            int idx = 138;
+            List<string> userIDList = new List<string>();
+            while(true)
+            {
+                string t = Convert.ToString(fileBytes[idx], 16).PadLeft(2, '0');
+                string id = "";
+                idx++;
+                if (t == "4e")
+                {
+                    break;
+                }
+                while(t!="00")
+                {
+                    id += t+"-";
+                }
+                userIDList.Add(id); 
+            }
+            File.WriteAllLines("C:\\Users\\peerawut\\Documents\\test.txt",userIDList);
+
         }
         private void importUserData(string filename)
         {
+            if(!File.Exists(filename))
+            {
+                MessageBox.Show("ไม่พบไฟล์ที่ต้องการ", "No File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             byte[] fileBytes = File.ReadAllBytes(filename);
             int idx = 210;
             string id = "";
