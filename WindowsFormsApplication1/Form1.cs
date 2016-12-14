@@ -29,7 +29,7 @@ namespace WindowsFormsApplication1
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             //importUserData("D:\\SaveData-20455.sav");
-            //importUserList("C:\\Users\\Peerawut\\Desktop\\Game 1\\RehabGame1Package\\Saved\\SaveGames\\UserListSave.sav");
+            //importUserList("D:\\UserListSave.sav");
         }
         private void runButton(object sender, EventArgs e)
         {
@@ -169,20 +169,25 @@ namespace WindowsFormsApplication1
             byte[] fileBytes = File.ReadAllBytes(filename);
             int idx = 138;
             List<string> userIDList = new List<string>();
+            string id = "";
             while(true)
             {
                 string t = Convert.ToString(fileBytes[idx], 16).PadLeft(2, '0');
-                string id = "";
                 idx++;
                 if (t == "4e")
                 {
                     break;
                 }
-                while(t!="00")
+                id += t+"-";
+                if(t == "00")
                 {
-                    id += t+"-";
+                    id = id.Remove(id.Length - 4);
+                    id = decryptHex(id);
+                    userIDList.Add(id);
+                    id = "";
+                    idx += 4;
                 }
-                userIDList.Add(id); 
+                
             }
             File.WriteAllLines("C:\\Users\\peerawut\\Documents\\test.txt",userIDList);
 
