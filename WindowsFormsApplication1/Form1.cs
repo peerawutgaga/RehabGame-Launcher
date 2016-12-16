@@ -28,7 +28,7 @@ namespace WindowsFormsApplication1
             initialDataGrid();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            //importUserData("D:\\SaveData-20455.sav");
+            importUserData("D:\\SaveData-20455.sav");
             //importUserList("D:\\UserListSave.sav");
         }
         private void runButton(object sender, EventArgs e)
@@ -290,7 +290,7 @@ namespace WindowsFormsApplication1
                surname = surname.Remove(surname.Length - 3);
                surname = decryptHex(surname);
             }
-            File.WriteAllText("D:\\testoutput.csv", id+","+name+","+surname);
+            File.WriteAllText("D:\\testoutput.sav", id+" "+name+" "+surname);
 
         }
        private string decryptHex(string hex)
