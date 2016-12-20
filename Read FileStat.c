@@ -27,7 +27,29 @@ void listdir(const char *name, FILE *f)
        // printf("%s\n",dirName);
         //printf("Size: %d bytes\n",fileStat.st_size);
         if(!S_ISDIR(fileStat.st_mode))
-        fprintf(f,"%s\t%d\n",dirName,fileStat.st_size);
+        {
+            double s = fileStat.st_size;
+            if(s>=1073741824)
+            {
+                s = s/1073741824;
+                fprintf(f,"%s\t%.2f\tGB\n",dirName,s);
+            }
+            else if(s>=1048576)
+            {
+                s = s/1048576;
+                fprintf(f,"%s\t%.2f\tMB\n",dirName,s);
+            }
+            else if(s>=1024)
+            {
+                s = s/1024;
+                fprintf(f,"%s\t%.2f\tKB\n",dirName,s);
+            }
+            else
+            {
+                fprintf(f,"%s\t%.0f\tByte\n",dirName,s);
+            }
+
+        }
         path[len] = 0;
         if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0)
             continue;
